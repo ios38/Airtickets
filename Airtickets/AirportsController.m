@@ -41,8 +41,10 @@
     label.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:label];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 130, screen.bounds.size.width, screen.bounds.size.height - 160)];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 130, screen.bounds.size.width, screen.bounds.size.height - 190)];
+    tableView.allowsSelection = NO;
     tableView.dataSource = self;
+    //tableView.backgroundColor = [UIColor blueColor];
     [self.view addSubview:tableView];
 }
 

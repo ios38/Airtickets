@@ -14,6 +14,7 @@
 @interface CountriesController ()
 
 @property (strong,nonatomic) NSMutableArray *countries;
+@property (strong, nonatomic) UITableView* tableView;
 
 @end
 
@@ -33,17 +34,23 @@
     label.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:label];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, screen.bounds.size.width, screen.bounds.size.height - 150)];
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    [self.view addSubview:tableView];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 90, screen.bounds.size.width, 40)];
+    searchBar.delegate = self;
+    searchBar.placeholder = @"search country";
+    [self.view addSubview:searchBar];
+
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 140, screen.bounds.size.width, screen.bounds.size.height - 200)];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    //self.tableView.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:self.tableView];
 
 
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, screen.bounds.size.height - 70, screen.bounds.size.width, 40)];
     [button addTarget:self action:@selector(nextScreen:) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor darkGrayColor];
     [button setTitle:@"Next" forState:UIControlStateNormal];
-    [self.view addSubview:button];
+    //[self.view addSubview:button];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -56,6 +63,15 @@
     [self.navigationController pushViewController:citiesController animated:YES];
 }
 
+- (NSMutableArray *)countriesFilteredWith:(NSString *)text{
+    NSMutableArray *countries = [NSMutableArray array];
+    for (Country *country in DataManager.shared.countries) {
+        if ([country.name containsString:text]) {
+            [countries addObject:country];
+        }
+    }
+    return countries;
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -77,6 +93,18 @@
     Country *country = [self.countries objectAtIndex:indexPath.row];
     UIViewController *citiesController = [[CitiesController alloc] initWithCountry:country];
     [self.navigationController pushViewController:citiesController animated:YES];
+}
+
+#pragma mark - UISearchBar
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if ([searchText  isEqual: @""]) {
+        self.countries = [NSMutableArray arrayWithArray:DataManager.shared.countries];
+        [self.tableView reloadData];
+    } else {
+        self.countries = [self countriesFilteredWith:searchText];
+        [self.tableView reloadData];
+    }
 }
 
 @end
