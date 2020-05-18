@@ -26,7 +26,7 @@
     UIScreen *screen = [UIScreen mainScreen];
 
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, screen.bounds.size.width, 40)];
-    label.text = [NSString stringWithFormat:@"Countries count: %lu", (unsigned long)[self.countries count]];
+    label.text = [NSString stringWithFormat:@"Countries (%lu)", (unsigned long)[self.countries count]];
     label.font = [UIFont systemFontOfSize:20 weight:UIFontWeightRegular];
     label.backgroundColor = [UIColor darkGrayColor];
     label.textColor = [UIColor whiteColor];
@@ -35,6 +35,7 @@
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, screen.bounds.size.width, screen.bounds.size.height - 150)];
     tableView.dataSource = self;
+    tableView.delegate = self;
     [self.view addSubview:tableView];
 
 
@@ -68,6 +69,14 @@
     countryCell.textLabel.text = country.name;
     
     return countryCell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Country *country = [self.countries objectAtIndex:indexPath.row];
+    UIViewController *citiesController = [[CitiesController alloc] initWithCountry:country];
+    [self.navigationController pushViewController:citiesController animated:YES];
 }
 
 @end

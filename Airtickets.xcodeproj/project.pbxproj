@@ -99,8 +99,8 @@
 				5065C7B324714D1300BC7841 /* main.m */,
 				50CBA76B2471A1EC003FDD90 /* AirportsController.h */,
 				50CBA76C2471A1EC003FDD90 /* AirportsController.m */,
-				5065C7D52471609700BC7841 /* CitiesController.m */,
 				5065C7D42471609700BC7841 /* CitiesController.h */,
+				5065C7D52471609700BC7841 /* CitiesController.m */,
 				5065C7D124715B3A00BC7841 /* CountriesController.h */,
 				5065C7D224715B3B00BC7841 /* CountriesController.m */,
 			);

@@ -9,23 +9,33 @@
 #import "CitiesController.h"
 #import "AirportsController.h"
 #import "DataManager.h"
+#import "Country.h"
 
 @interface CitiesController ()
 
+@property (strong,nonatomic) Country *country;
 @property (strong,nonatomic) NSMutableArray *cities;
 
 @end
 
 @implementation CitiesController
 
+- (instancetype)initWithCountry:(Country *)country {
+    self = [super init];
+    if (self) {
+        self.country = country;
+        self.cities = [self citiesFilteredWith:country.code];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.cities = [NSMutableArray arrayWithArray:DataManager.shared.cities];
-
     UIScreen *screen = [UIScreen mainScreen];
 
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, screen.bounds.size.width, 40)];
-    label.text = [NSString stringWithFormat:@"Cities count: %lu", (unsigned long)[self.cities count]];
+    label.text = [NSString stringWithFormat:@"Cities of %@ (%lu)", self.country.name,(unsigned long)[self.cities count]];
+    //label.text = [NSString stringWithFormat:@"Cities count: %lu", (unsigned long)[self.cities count]];
     label.font = [UIFont systemFontOfSize:20 weight:UIFontWeightRegular];
     label.backgroundColor = [UIColor darkGrayColor];
     label.textColor = [UIColor whiteColor];
@@ -34,6 +44,7 @@
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 130, screen.bounds.size.width, screen.bounds.size.height - 200)];
     tableView.dataSource = self;
+    tableView.delegate = self;
     [self.view addSubview:tableView];
 
 
@@ -54,6 +65,16 @@
     [self.navigationController pushViewController:airportController animated:YES];
 }
 
+- (NSMutableArray *)citiesFilteredWith:(NSString *)countryCode{
+    NSMutableArray *cities = [NSMutableArray array];
+    for (City *city in DataManager.shared.cities) {
+        if (city.countryCode == countryCode) {
+            [cities addObject:city];
+        }
+    }
+    return cities;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -66,6 +87,14 @@
     cityCell.textLabel.text = city.name;
     
     return cityCell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    City *city = [self.cities objectAtIndex:indexPath.row];
+    UIViewController *airportController = [[AirportsController alloc] initWithCity:city];
+    [self.navigationController pushViewController:airportController animated:YES];
 }
 
 @end

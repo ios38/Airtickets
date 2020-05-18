@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Country.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CitiesController : UIViewController <UITableViewDataSource>
+@interface CitiesController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+-(instancetype)initWithCountry:(Country *)country;
 
 @end
 

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "City.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AirportsController : UIViewController <UITableViewDataSource>
+
+-(instancetype)initWithCity:(City *)city;
 
 @end
 

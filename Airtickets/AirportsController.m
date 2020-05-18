@@ -9,23 +9,32 @@
 #import "AirportsController.h"
 #import "DataManager.h"
 #import "Airport.h"
+#import "City.h"
 
 @interface AirportsController ()
 
+@property (strong,nonatomic) City *city;
 @property (strong,nonatomic) NSMutableArray *airports;
 
 @end
 
 @implementation AirportsController
 
+- (instancetype)initWithCity:(City *)city {
+    self = [super init];
+    if (self) {
+        self.city = city;
+        self.airports = [self airportsFilteredWith:city.code and:city.countryCode];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.airports = [NSMutableArray arrayWithArray:DataManager.shared.airports];
-
     UIScreen *screen = [UIScreen mainScreen];
 
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, screen.bounds.size.width, 40)];
-    label.text = [NSString stringWithFormat:@"Airports count: %lu", (unsigned long)[self.airports count]];
+    label.text = [NSString stringWithFormat:@"Airports of %@ (%lu)", self.city.name,(unsigned long)[self.airports count]];
     label.font = [UIFont systemFontOfSize:20 weight:UIFontWeightRegular];
     label.backgroundColor = [UIColor darkGrayColor];
     label.textColor = [UIColor whiteColor];
@@ -35,6 +44,17 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 130, screen.bounds.size.width, screen.bounds.size.height - 160)];
     tableView.dataSource = self;
     [self.view addSubview:tableView];
+}
+
+- (NSMutableArray *)airportsFilteredWith:(NSString *)cityCode and:(NSString *)countryCode {
+    NSMutableArray *airports = [NSMutableArray array];
+    for (Airport *airport in DataManager.shared.airports) {
+        if (airport.cityCode == cityCode && airport.countryCode == countryCode) {
+            //NSLog(@"%@,%@,%@",airport.name,cityCode,countryCode);
+            [airports addObject:airport];
+        }
+    }
+    return airports;
 }
 
 #pragma mark - UITableViewDataSource
