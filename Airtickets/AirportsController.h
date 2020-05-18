@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AirportsController : UIViewController
+@interface AirportsController : UIViewController <UITableViewDataSource>
 
 @end
 
