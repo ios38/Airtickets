@@ -16,8 +16,7 @@
 
 @implementation DataManager
 
-+ (instancetype)shared
-{
++ (instancetype)shared{
     static DataManager *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -26,17 +25,16 @@
     return instance;
 }
 
-- (void)loadData
-{
+- (void)loadData {
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0), ^{
         NSArray *countriesJsonArray = [self arrayFromFileName:@"countries" ofType:@"json"];
-        self->_countriesArray = [self createObjectsFromArray:countriesJsonArray withType: DataSourceTypeCountry];
+        self.countriesArray = [self createObjectsFromArray:countriesJsonArray withType: DataSourceTypeCountry];
         
         NSArray *citiesJsonArray = [self arrayFromFileName:@"cities" ofType:@"json"];
-        self->_citiesArray = [self createObjectsFromArray:citiesJsonArray withType: DataSourceTypeCity];
+        self.citiesArray = [self createObjectsFromArray:citiesJsonArray withType: DataSourceTypeCity];
         
         NSArray *airportsJsonArray = [self arrayFromFileName:@"airports" ofType:@"json"];
-        self->_airportsArray = [self createObjectsFromArray:airportsJsonArray withType: DataSourceTypeAirport];
+        self.airportsArray = [self createObjectsFromArray:airportsJsonArray withType: DataSourceTypeAirport];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:kDataManagerLoadDataDidComplete object:nil];
@@ -45,8 +43,7 @@
     });
 }
 
-- (NSMutableArray *)createObjectsFromArray:(NSArray *)array withType:(DataSourceType)type
-{
+- (NSMutableArray *)createObjectsFromArray:(NSArray *)array withType:(DataSourceType)type {
     NSMutableArray *results = [NSMutableArray new];
     
     for (NSDictionary *jsonObject in array) {
@@ -67,25 +64,21 @@
     return results;
 }
 
-- (NSArray *)arrayFromFileName:(NSString *)fileName ofType:(NSString *)type
-{
+- (NSArray *)arrayFromFileName:(NSString *)fileName ofType:(NSString *)type {
     NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:type];
     NSData *data = [NSData dataWithContentsOfFile:path];
     return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 }
 
-- (NSArray *)countries
-{
+- (NSArray *)countries {
     return _countriesArray;
 }
 
-- (NSArray *)cities
-{
+- (NSArray *)cities {
     return _citiesArray;
 }
 
-- (NSArray *)airports
-{
+- (NSArray *)airports {
     return _airportsArray;
 }
 
