@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "DataManager.h"
 #import "CountriesController.h"
+#import "MapController.h"
 
 @interface ViewController ()
 
@@ -32,8 +33,11 @@
 }
 
 - (void)loadDataComplete:(NSNotification *)notification {
-    UIViewController *countriesController = [[CountriesController alloc] init];
-    [self.navigationController pushViewController:countriesController animated:NO];
+    //UIViewController *countriesController = [[CountriesController alloc] init];
+    //[self.navigationController pushViewController:countriesController animated:NO];
+    UIViewController *mapController = [[MapController alloc] init];
+    [self.navigationController pushViewController:mapController animated:NO];
+
 }
 
 

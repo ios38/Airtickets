@@ -23,6 +23,7 @@
 		5065C7D324715B3B00BC7841 /* CountriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7D224715B3B00BC7841 /* CountriesController.m */; };
 		5065C7D62471609700BC7841 /* CitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7D52471609700BC7841 /* CitiesController.m */; };
 		50CBA76D2471A1EC003FDD90 /* AirportsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CBA76C2471A1EC003FDD90 /* AirportsController.m */; };
+		50FF26412491DC47007D6F6E /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FF26402491DC47007D6F6E /* MapController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,8 @@
 		5065C7D52471609700BC7841 /* CitiesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CitiesController.m; sourceTree = "<group>"; };
 		50CBA76B2471A1EC003FDD90 /* AirportsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirportsController.h; sourceTree = "<group>"; };
 		50CBA76C2471A1EC003FDD90 /* AirportsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirportsController.m; sourceTree = "<group>"; };
+		50FF263F2491DC47007D6F6E /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
+		50FF26402491DC47007D6F6E /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				5065C7D52471609700BC7841 /* CitiesController.m */,
 				5065C7D124715B3A00BC7841 /* CountriesController.h */,
 				5065C7D224715B3B00BC7841 /* CountriesController.m */,
+				50FF263F2491DC47007D6F6E /* MapController.h */,
+				50FF26402491DC47007D6F6E /* MapController.m */,
 			);
 			path = Airtickets;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				5065C7D324715B3B00BC7841 /* CountriesController.m in Sources */,
 				5065C7C424714F0800BC7841 /* Airport.m in Sources */,
 				5065C7A324714D1200BC7841 /* AppDelegate.m in Sources */,
+				50FF26412491DC47007D6F6E /* MapController.m in Sources */,
 				5065C7D62471609700BC7841 /* CitiesController.m in Sources */,
 				5065C7B424714D1300BC7841 /* main.m in Sources */,
 				5065C7C724714F2300BC7841 /* Country.m in Sources */,

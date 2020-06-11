@@ -42,8 +42,9 @@
     [self.view addSubview:label];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 130, screen.bounds.size.width, screen.bounds.size.height - 190)];
-    tableView.allowsSelection = NO;
+    //tableView.allowsSelection = NO;
     tableView.dataSource = self;
+    tableView.delegate = self;
     //tableView.backgroundColor = [UIColor blueColor];
     [self.view addSubview:tableView];
 }
@@ -71,6 +72,15 @@
     airportCell.textLabel.text = airport.name;
     
     return airportCell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Airport *airport = [self.airports objectAtIndex:indexPath.row];
+    double latitude = airport.coordinate.latitude;
+    double longitude = airport.coordinate.longitude;
+    NSLog(@"%@: %f, %f",airport.name,latitude,longitude);
 }
 
 @end
