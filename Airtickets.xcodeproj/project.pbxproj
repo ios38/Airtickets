@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FE1A03E1145355A1C2E297F /* Pods_Airtickets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8417A5A4EDDB1EF20AE0098B /* Pods_Airtickets.framework */; };
 		5065C7A324714D1200BC7841 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7A224714D1200BC7841 /* AppDelegate.m */; };
 		5065C7A624714D1200BC7841 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7A524714D1200BC7841 /* SceneDelegate.m */; };
 		5065C7A924714D1200BC7841 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7A824714D1200BC7841 /* ViewController.m */; };
@@ -57,6 +58,9 @@
 		50CBA76C2471A1EC003FDD90 /* AirportsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirportsController.m; sourceTree = "<group>"; };
 		50FF263F2491DC47007D6F6E /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
 		50FF26402491DC47007D6F6E /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
+		73023F94646ECC99084F91B2 /* Pods-Airtickets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airtickets.release.xcconfig"; path = "Target Support Files/Pods-Airtickets/Pods-Airtickets.release.xcconfig"; sourceTree = "<group>"; };
+		8417A5A4EDDB1EF20AE0098B /* Pods_Airtickets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Airtickets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE32765D80E8725FDD6DF9E3 /* Pods-Airtickets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airtickets.debug.xcconfig"; path = "Target Support Files/Pods-Airtickets/Pods-Airtickets.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,17 +68,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FE1A03E1145355A1C2E297F /* Pods_Airtickets.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		151D8FDCFCA8F5D736EA6744 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8417A5A4EDDB1EF20AE0098B /* Pods_Airtickets.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4FAEFA05D5416ACB14B3DA85 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE32765D80E8725FDD6DF9E3 /* Pods-Airtickets.debug.xcconfig */,
+				73023F94646ECC99084F91B2 /* Pods-Airtickets.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		5065C79524714D1200BC7841 = {
 			isa = PBXGroup;
 			children = (
 				5065C7A024714D1200BC7841 /* Airtickets */,
 				5065C79F24714D1200BC7841 /* Products */,
+				4FAEFA05D5416ACB14B3DA85 /* Pods */,
+				151D8FDCFCA8F5D736EA6744 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5065C7B724714D1300BC7841 /* Build configuration list for PBXNativeTarget "Airtickets" */;
 			buildPhases = (
+				5DB40DF1914437464243366C /* [CP] Check Pods Manifest.lock */,
 				5065C79A24714D1200BC7841 /* Sources */,
 				5065C79B24714D1200BC7841 /* Frameworks */,
 				5065C79C24714D1200BC7841 /* Resources */,
+				9AE1B83B8351B3698C337D8C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -204,6 +231,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5DB40DF1914437464243366C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Airtickets-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9AE1B83B8351B3698C337D8C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Airtickets/Pods-Airtickets-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Airtickets/Pods-Airtickets-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Airtickets/Pods-Airtickets-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5065C79A24714D1200BC7841 /* Sources */ = {
@@ -351,6 +420,7 @@
 		};
 		5065C7B824714D1300BC7841 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE32765D80E8725FDD6DF9E3 /* Pods-Airtickets.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -368,6 +438,7 @@
 		};
 		5065C7B924714D1300BC7841 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73023F94646ECC99084F91B2 /* Pods-Airtickets.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
