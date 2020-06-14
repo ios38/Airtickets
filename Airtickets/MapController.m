@@ -11,6 +11,9 @@
 #import "Country.h"
 #import "City.h"
 #import "Airport.h"
+#import "LocationService.h"
+#import "AirportAnnotationView.h"
+#import "AirportCalloutView.h"
 
 #define MAS_SHORTHAND
 #import "Masonry.h"
@@ -21,6 +24,9 @@
 @property (strong,nonatomic) NSArray *airportsInRegion;
 @property (strong,nonatomic) NSMutableArray *annotations;
 @property (strong,nonatomic) MKMapView *mapView;
+@property (strong,nonatomic) UIButton *myLocationButton;
+@property (strong,nonatomic) LocationService *locationService;
+@property (strong,nonatomic) CLLocation *currentLocation;
 
 @end
 
@@ -30,32 +36,54 @@
     [super viewDidLoad];
     self.view.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     self.navigationController.navigationBar.hidden = YES;
-        
+    self.locationService = [[LocationService alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationWasUpdated:) name:kLocationServiceDidUpdateCurrentLocation object:nil];
+
     self.mapView = MKMapView.new;
-
-    //CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.023502, 2.560485); //Бурж, Франция
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(52.281385, 104.293779); //Иркутск
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 100000, 100000);
-    [self.mapView setRegion: region animated: YES];
-
     self.mapView.delegate = self;
     [self.view addSubview:self.mapView];
     [self.mapView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
 
-    //MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    //annotation.title = @"I'm here!";
-    //annotation.coordinate = CLLocationCoordinate2DMake(47.023502, 2.560485);
-    //[mapView addAnnotation:annotation];
+    self.myLocationButton = UIButton.new;
+    [self.myLocationButton setImage:[UIImage systemImageNamed:@"location.fill"] forState:UIControlStateNormal];
+    self.myLocationButton.tintColor = [UIColor whiteColor];
+    self.myLocationButton.layer.cornerRadius = 10;
+    self.myLocationButton.backgroundColor = [UIColor grayColor];
+    [self.myLocationButton addTarget:self action:@selector(showMyLocation) forControlEvents:UIControlEventTouchUpInside];
+    [self.mapView addSubview:self.myLocationButton];
+    [self.myLocationButton makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mapView).with.inset(30);
+        make.right.equalTo(self.mapView).with.inset(10);
+        make.width.height.mas_equalTo(30);
+    }];
 
     self.airports = DataManager.shared.airports;
-    NSLog(@"All airports count: %lu",(unsigned long)[self.airports count]);
-    self.airportsInRegion = [self airportsInRegion:region];
-    self.annotations = [self annotationsFromAirports:self.airportsInRegion];
-    [self.mapView addAnnotations:self.annotations];
+    self.annotations = NSMutableArray.new;
+}
+
+- (void)locationWasUpdated:(NSNotification*)notification {
+    CLLocation *location = notification.object;
+    self.currentLocation = location;
+    CLLocationCoordinate2D coordinate = location.coordinate;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 100000, 100000);
+    [self.mapView setRegion: region animated: YES];
+
+    MKUserLocation *annotation = MKUserLocation.new;
+    annotation.coordinate = coordinate;
+    [self.mapView addAnnotation:annotation];
 
 }
+
+- (void)showMyLocation {
+    //CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.023502, 2.560485); //Бурж, Франция
+    //CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(52.281385, 104.293779); //Иркутск
+    CLLocationCoordinate2D coordinate = self.currentLocation.coordinate;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 100000, 100000);
+    [self.mapView setRegion: region animated: YES];
+}
+
 
 - (NSMutableArray *)airportsFilteredWith:(NSString *)countryCode {
     NSMutableArray *airports = NSMutableArray.new;
@@ -92,6 +120,7 @@
         annotation.title = [self cityWithCityCode:airport.cityCode];
         annotation.subtitle = airport.name;
         annotation.coordinate = airport.coordinate;
+        
         [annotations addObject:annotation];
     }
     return annotations;
@@ -118,13 +147,11 @@
     return annotationsToRemove;
 }
 
-/* Standardises and angle to [-180 to 180] degrees */
 - (CLLocationDegrees)standardAngle:(CLLocationDegrees)angle {
     //angle %= 360;
     return angle < -180 ? -360 - angle : angle > 180 ? 360 - 180 : angle;
 }
 
-/* confirms that a region contains a location */
 - (BOOL)region:(MKCoordinateRegion)region containsLocation:(CLLocation*)location {
     CLLocationDegrees deltaLat = fabs([self standardAngle:(region.center.latitude - location.coordinate.latitude)]);
     CLLocationDegrees deltalong = fabs([self standardAngle:(region.center.longitude - location.coordinate.longitude)]);
@@ -135,20 +162,43 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     static NSString *identifier = @"MarkerIdentifier";
-    MKMarkerAnnotationView *annotationView = (MKMarkerAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    if (!annotationView) {
-        annotationView = [[MKMarkerAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        annotationView.canShowCallout = YES;
-        annotationView.calloutOffset = CGPointMake(0.0, 10.0);
-        annotationView.glyphImage = [UIImage systemImageNamed:@"airplane"];
-        annotationView.markerTintColor = [UIColor blueColor];
-        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    if ([annotation isKindOfClass:[MKUserLocation class]]){
+        return nil;
+    } else {
+        AirportAnnotationView *annotationView = (AirportAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (!annotationView) {
+            annotationView = [[AirportAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        } else {
+            annotationView.annotation = annotation;
+        }
+        return annotationView;
     }
-    annotationView.annotation = annotation;
-    return annotationView;
+}
+
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    NSLog(@"didSelectAnnotationView with title: %@",view.annotation.title);
+    if (![view.annotation isKindOfClass:[MKUserLocation class]]){
+        
+        AirportCalloutView *airportCalloutView = [[AirportCalloutView alloc] initWithAnnotation:view.annotation];
+        airportCalloutView.center = CGPointMake(view.bounds.size.width / 2, -airportCalloutView.bounds.size.height*0.6);
+
+        [view addSubview:airportCalloutView];
+        [self.mapView setCenterCoordinate:view.annotation.coordinate];
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    NSLog(@"didDeselectAnnotationView with title: %@",view.annotation.title);
+    if ([view isKindOfClass:[AirportAnnotationView class]]) {
+        for (AirportCalloutView *subview in view.subviews) {
+            [subview removeFromSuperview];
+        }
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    dispatch_async(dispatch_get_main_queue(), ^{
     NSArray *newAirports = NSArray.new;
     NSArray *airportsToAdd = NSArray.new;
     NSArray *annotationsToAdd = NSArray.new;
@@ -189,9 +239,11 @@
     //    [annotations appendFormat:@"%@ ",annotation.title];
     //}
     //NSLog(@"%@ ",annotations);
+    });
 }
 
 - (void)mapViewDidChangeVisibleRegion:(MKMapView *)mapView {
+    
 }
 
 
