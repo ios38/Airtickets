@@ -28,6 +28,7 @@
 		50C6A1CB2496490E00077691 /* AirportAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C6A1CA2496490E00077691 /* AirportAnnotationView.m */; };
 		50CBA76D2471A1EC003FDD90 /* AirportsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CBA76C2471A1EC003FDD90 /* AirportsController.m */; };
 		50FF26412491DC47007D6F6E /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FF26402491DC47007D6F6E /* MapController.m */; };
+		50FF26452497512E007D6F6E /* ResultsCaretaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FF26442497512E007D6F6E /* ResultsCaretaker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,8 @@
 		50CBA76C2471A1EC003FDD90 /* AirportsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirportsController.m; sourceTree = "<group>"; };
 		50FF263F2491DC47007D6F6E /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
 		50FF26402491DC47007D6F6E /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
+		50FF26432497512E007D6F6E /* ResultsCaretaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsCaretaker.h; sourceTree = "<group>"; };
+		50FF26442497512E007D6F6E /* ResultsCaretaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsCaretaker.m; sourceTree = "<group>"; };
 		73023F94646ECC99084F91B2 /* Pods-Airtickets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airtickets.release.xcconfig"; path = "Target Support Files/Pods-Airtickets/Pods-Airtickets.release.xcconfig"; sourceTree = "<group>"; };
 		8417A5A4EDDB1EF20AE0098B /* Pods_Airtickets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Airtickets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE32765D80E8725FDD6DF9E3 /* Pods-Airtickets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airtickets.debug.xcconfig"; path = "Target Support Files/Pods-Airtickets/Pods-Airtickets.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		5065C7A024714D1200BC7841 /* Airtickets */ = {
 			isa = PBXGroup;
 			children = (
+				50FF26422497502E007D6F6E /* Services */,
 				5041E9062495073E009B9C09 /* Location */,
 				5065C7BA24714E4B00BC7841 /* Data */,
 				5065C7A124714D1200BC7841 /* AppDelegate.h */,
@@ -183,6 +187,15 @@
 				5065C7C624714F2300BC7841 /* Country.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		50FF26422497502E007D6F6E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				50FF26432497512E007D6F6E /* ResultsCaretaker.h */,
+				50FF26442497512E007D6F6E /* ResultsCaretaker.m */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5065C7A924714D1200BC7841 /* ViewController.m in Sources */,
+				50FF26452497512E007D6F6E /* ResultsCaretaker.m in Sources */,
 				5041E90F24960800009B9C09 /* AirportCalloutView.m in Sources */,
 				5065C7D324715B3B00BC7841 /* CountriesController.m in Sources */,
 				5065C7C424714F0800BC7841 /* Airport.m in Sources */,

@@ -38,7 +38,7 @@
     self.navigationController.navigationBar.hidden = YES;
     self.locationService = [[LocationService alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationWasUpdated:) name:kLocationServiceDidUpdateCurrentLocation object:nil];
-
+        
     self.mapView = MKMapView.new;
     self.mapView.delegate = self;
     [self.view addSubview:self.mapView];
@@ -77,11 +77,8 @@
 }
 
 - (void)showMyLocation {
-    //CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.023502, 2.560485); //Бурж, Франция
-    //CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(52.281385, 104.293779); //Иркутск
     CLLocationCoordinate2D coordinate = self.currentLocation.coordinate;
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 100000, 100000);
-    [self.mapView setRegion: region animated: YES];
+    [self.mapView setCenterCoordinate:coordinate animated:YES];
 }
 
 
@@ -100,16 +97,13 @@
 
 - (NSMutableArray *)airportsInRegion:(MKCoordinateRegion) region {
     NSMutableArray *airports = NSMutableArray.new;
-    int i = 0;
     for (Airport *airport in self.airports) {
         //NSLog(@"%@,%f,%f",airport.name,airport.coordinate.latitude,airport.coordinate.longitude);
         CLLocation *airportLocation = [[CLLocation alloc] initWithLatitude:airport.coordinate.latitude longitude:airport.coordinate.longitude];
         if ([self region:region containsLocation:airportLocation]) {
-            i++;
             [airports addObject:airport];
         }
     }
-    //NSLog(@"Airports in region count: %d",i);
     return airports;
 }
 
@@ -177,36 +171,48 @@
 
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    NSLog(@"didSelectAnnotationView with title: %@",view.annotation.title);
+    //NSLog(@"didSelectAnnotationView with title: %@",view.annotation.title);
     if (![view.annotation isKindOfClass:[MKUserLocation class]]){
         
         AirportCalloutView *airportCalloutView = [[AirportCalloutView alloc] initWithAnnotation:view.annotation];
         airportCalloutView.center = CGPointMake(view.bounds.size.width / 2, -airportCalloutView.bounds.size.height*0.6);
+        [airportCalloutView.selectButton addTarget:self action:@selector(selectButtonTappedWith:) forControlEvents:UIControlEventTouchUpInside];
 
         [view addSubview:airportCalloutView];
-        [self.mapView setCenterCoordinate:view.annotation.coordinate];
+        [self.mapView setCenterCoordinate:view.annotation.coordinate animated:YES];
     }
 }
 
+- (void) selectButtonTappedWith:(UIButton *)sender {
+    AirportCalloutView *view = (AirportCalloutView *)sender.superview;
+    NSLog(@"Selected Airport: %@",view.annotation.title);
+    [view removeFromSuperview];
+}
+
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    NSLog(@"didDeselectAnnotationView with title: %@",view.annotation.title);
+    //NSLog(@"didDeselectAnnotationView with title: %@",view.annotation.title);
     if ([view isKindOfClass:[AirportAnnotationView class]]) {
         for (AirportCalloutView *subview in view.subviews) {
-            [subview removeFromSuperview];
+            if ([subview isKindOfClass:[AirportCalloutView class]]) {
+                [subview removeFromSuperview];
+            }
         }
     }
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    //NSLog(@"region span: %f,%f",mapView.region.span.latitudeDelta,mapView.region.span.longitudeDelta);
+
+    if (mapView.region.span.latitudeDelta < 40 && mapView.region.span.longitudeDelta < 40) {
+    //dispatch_queue_t queue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
+    //dispatch_async(queue, ^{
     NSArray *newAirports = NSArray.new;
     NSArray *airportsToAdd = NSArray.new;
     NSArray *annotationsToAdd = NSArray.new;
     NSArray *annotationsToRemove = NSArray.new;
-
+    
     //MKMapRect mapRect = mapView.visibleMapRect;
     //MKCoordinateRegion region = MKCoordinateRegionForMapRect(mapRect);
-    //NSLog(@"region span: %f,%f",mapView.region.span.latitudeDelta,mapView.region.span.longitudeDelta);
     MKCoordinateRegion region = mapView.region;
     newAirports = [self airportsInRegion:region];
 
@@ -239,13 +245,16 @@
     //    [annotations appendFormat:@"%@ ",annotation.title];
     //}
     //NSLog(@"%@ ",annotations);
-    });
+    //});
+    } else {
+        self.airportsInRegion = @[];
+        [self.mapView removeAnnotations:self.annotations];
+        [self.annotations removeAllObjects];
+    }
 }
 
 - (void)mapViewDidChangeVisibleRegion:(MKMapView *)mapView {
     
 }
-
-
 
 @end
