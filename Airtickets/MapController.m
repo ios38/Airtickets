@@ -185,8 +185,10 @@
 
 - (void) selectButtonTappedWith:(UIButton *)sender {
     AirportCalloutView *view = (AirportCalloutView *)sender.superview;
-    NSLog(@"Selected Airport: %@",view.annotation.title);
+    //NSLog(@"Selected Airport: %@",view.annotation.subtitle);
+    NSString *airport = view.annotation.subtitle;
     [view removeFromSuperview];
+    NSLog(@"Selected Airport: %@",airport);
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
@@ -201,7 +203,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    //NSLog(@"region span: %f,%f",mapView.region.span.latitudeDelta,mapView.region.span.longitudeDelta);
+    //NSLog(@"region span: %f,%f", mapView.region.span.latitudeDelta, mapView.region.span.longitudeDelta);
 
     if (mapView.region.span.latitudeDelta < 40 && mapView.region.span.longitudeDelta < 40) {
     //dispatch_queue_t queue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
