@@ -16,7 +16,7 @@
 @interface CitiesController ()
 
 @property (strong,nonatomic) Country *country;
-@property (strong,nonatomic) NSMutableArray *cities;
+@property (strong,nonatomic) NSArray *cities;
 @property (strong, nonatomic) UITableView* tableView;
 
 @end
@@ -67,24 +67,14 @@
     //self.navigationController.navigationBar.hidden = NO;
 }
 
-- (NSMutableArray *)citiesFilteredWith:(NSString *)countryCode{
-    NSMutableArray *cities = [NSMutableArray array];
-    for (City *city in DataManager.shared.cities) {
-        if (city.countryCode == countryCode) {
-            [cities addObject:city];
-        }
-    }
-    return cities;
+- (NSArray *)citiesFilteredWith:(NSString *)countryCode{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.countryCode MATCHES[cd] %@", countryCode];
+    return [DataManager.shared.cities filteredArrayUsingPredicate:predicate];
 }
 
-- (NSMutableArray *)citiesFilteredWith:(NSString *)countryCode andText:(NSString *)text{
-    NSMutableArray *cities = [NSMutableArray array];
-    for (City *city in DataManager.shared.cities) {
-        if (city.countryCode == countryCode && [city.name containsString:text]) {
-            [cities addObject:city];
-        }
-    }
-    return cities;
+- (NSArray *)citiesFilteredWith:(NSString *)countryCode andText:(NSString *)text{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name CONTAINS[cd] %@ AND SELF.countryCode MATCHES[cd] %@", text, countryCode];
+    return [DataManager.shared.cities filteredArrayUsingPredicate:predicate];
 }
 
 #pragma mark - UITableViewDataSource

@@ -10,11 +10,12 @@
 		0FE1A03E1145355A1C2E297F /* Pods_Airtickets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8417A5A4EDDB1EF20AE0098B /* Pods_Airtickets.framework */; };
 		500C72D7249F34E000E47944 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C72D6249F34E000E47944 /* TabBarController.m */; };
 		500C72DA249F5F5D00E47944 /* UserSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C72D9249F5F5D00E47944 /* UserSession.m */; };
+		5030C6CB24A09B0000D6B3E4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5030C6CA24A09B0000D6B3E4 /* ViewController.m */; };
 		5041E9092495073E009B9C09 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5041E9072495073E009B9C09 /* LocationService.m */; };
 		5041E90F24960800009B9C09 /* AirportCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5041E90E24960800009B9C09 /* AirportCalloutView.m */; };
 		5065C7A324714D1200BC7841 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7A224714D1200BC7841 /* AppDelegate.m */; };
 		5065C7A624714D1200BC7841 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7A524714D1200BC7841 /* SceneDelegate.m */; };
-		5065C7A924714D1200BC7841 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7A824714D1200BC7841 /* ViewController.m */; };
+		5065C7A924714D1200BC7841 /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7A824714D1200BC7841 /* MainMenuController.m */; };
 		5065C7AE24714D1300BC7841 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5065C7AD24714D1300BC7841 /* Assets.xcassets */; };
 		5065C7B124714D1300BC7841 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5065C7AF24714D1300BC7841 /* LaunchScreen.storyboard */; };
 		5065C7B424714D1300BC7841 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7B324714D1300BC7841 /* main.m */; };
@@ -38,6 +39,8 @@
 		500C72D6249F34E000E47944 /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		500C72D8249F5F5D00E47944 /* UserSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSession.h; sourceTree = "<group>"; };
 		500C72D9249F5F5D00E47944 /* UserSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserSession.m; sourceTree = "<group>"; };
+		5030C6C924A09B0000D6B3E4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		5030C6CA24A09B0000D6B3E4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5041E9072495073E009B9C09 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
 		5041E9082495073E009B9C09 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
 		5041E90D24960800009B9C09 /* AirportCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirportCalloutView.h; sourceTree = "<group>"; };
@@ -47,8 +50,8 @@
 		5065C7A224714D1200BC7841 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5065C7A424714D1200BC7841 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		5065C7A524714D1200BC7841 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		5065C7A724714D1200BC7841 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5065C7A824714D1200BC7841 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5065C7A724714D1200BC7841 /* MainMenuController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainMenuController.h; sourceTree = "<group>"; };
+		5065C7A824714D1200BC7841 /* MainMenuController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMenuController.m; sourceTree = "<group>"; };
 		5065C7AD24714D1300BC7841 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5065C7B024714D1300BC7841 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5065C7B224714D1300BC7841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,6 +113,54 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		500C72DB24A0BF0300E47944 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				500C72DE24A0BF4C00E47944 /* List */,
+				500C72DD24A0BF3C00E47944 /* Map */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		500C72DC24A0BF1400E47944 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				5065C7AD24714D1300BC7841 /* Assets.xcassets */,
+				5065C7AF24714D1300BC7841 /* LaunchScreen.storyboard */,
+				5065C7A124714D1200BC7841 /* AppDelegate.h */,
+				5065C7A224714D1200BC7841 /* AppDelegate.m */,
+				5065C7A424714D1200BC7841 /* SceneDelegate.h */,
+				5065C7A524714D1200BC7841 /* SceneDelegate.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		500C72DD24A0BF3C00E47944 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				50FF263F2491DC47007D6F6E /* MapController.h */,
+				50FF26402491DC47007D6F6E /* MapController.m */,
+				5041E90D24960800009B9C09 /* AirportCalloutView.h */,
+				5041E90E24960800009B9C09 /* AirportCalloutView.m */,
+				50C6A1C92496490E00077691 /* AirportAnnotationView.h */,
+				50C6A1CA2496490E00077691 /* AirportAnnotationView.m */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		500C72DE24A0BF4C00E47944 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				50CBA76B2471A1EC003FDD90 /* AirportsController.h */,
+				50CBA76C2471A1EC003FDD90 /* AirportsController.m */,
+				5065C7D42471609700BC7841 /* CitiesController.h */,
+				5065C7D52471609700BC7841 /* CitiesController.m */,
+				5065C7D124715B3A00BC7841 /* CountriesController.h */,
+				5065C7D224715B3B00BC7841 /* CountriesController.m */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		5041E9062495073E009B9C09 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,35 +191,21 @@
 		5065C7A024714D1200BC7841 /* Airtickets */ = {
 			isa = PBXGroup;
 			children = (
+				500C72DC24A0BF1400E47944 /* Core */,
 				50FF26422497502E007D6F6E /* Services */,
 				5041E9062495073E009B9C09 /* Location */,
 				5065C7BA24714E4B00BC7841 /* Data */,
-				5065C7A124714D1200BC7841 /* AppDelegate.h */,
-				5065C7A224714D1200BC7841 /* AppDelegate.m */,
-				5065C7A424714D1200BC7841 /* SceneDelegate.h */,
-				5065C7A524714D1200BC7841 /* SceneDelegate.m */,
-				5065C7A724714D1200BC7841 /* ViewController.h */,
-				5065C7A824714D1200BC7841 /* ViewController.m */,
-				5065C7AD24714D1300BC7841 /* Assets.xcassets */,
-				5065C7AF24714D1300BC7841 /* LaunchScreen.storyboard */,
-				5065C7B224714D1300BC7841 /* Info.plist */,
-				5065C7B324714D1300BC7841 /* main.m */,
-				50CBA76B2471A1EC003FDD90 /* AirportsController.h */,
-				50CBA76C2471A1EC003FDD90 /* AirportsController.m */,
-				5065C7D42471609700BC7841 /* CitiesController.h */,
-				5065C7D52471609700BC7841 /* CitiesController.m */,
-				5065C7D124715B3A00BC7841 /* CountriesController.h */,
-				5065C7D224715B3B00BC7841 /* CountriesController.m */,
-				50FF263F2491DC47007D6F6E /* MapController.h */,
-				50FF26402491DC47007D6F6E /* MapController.m */,
-				5041E90D24960800009B9C09 /* AirportCalloutView.h */,
-				5041E90E24960800009B9C09 /* AirportCalloutView.m */,
-				50C6A1C92496490E00077691 /* AirportAnnotationView.h */,
-				50C6A1CA2496490E00077691 /* AirportAnnotationView.m */,
+				500C72DB24A0BF0300E47944 /* Flows */,
+				5065C7A724714D1200BC7841 /* MainMenuController.h */,
+				5065C7A824714D1200BC7841 /* MainMenuController.m */,
 				500C72D5249F34E000E47944 /* TabBarController.h */,
 				500C72D6249F34E000E47944 /* TabBarController.m */,
 				500C72D8249F5F5D00E47944 /* UserSession.h */,
 				500C72D9249F5F5D00E47944 /* UserSession.m */,
+				5030C6C924A09B0000D6B3E4 /* ViewController.h */,
+				5030C6CA24A09B0000D6B3E4 /* ViewController.m */,
+				5065C7B224714D1300BC7841 /* Info.plist */,
+				5065C7B324714D1300BC7841 /* main.m */,
 			);
 			path = Airtickets;
 			sourceTree = "<group>";
@@ -324,7 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5065C7A924714D1200BC7841 /* ViewController.m in Sources */,
+				5065C7A924714D1200BC7841 /* MainMenuController.m in Sources */,
 				50FF26452497512E007D6F6E /* ResultsCaretaker.m in Sources */,
 				5041E90F24960800009B9C09 /* AirportCalloutView.m in Sources */,
 				5065C7D324715B3B00BC7841 /* CountriesController.m in Sources */,
@@ -332,6 +369,7 @@
 				5065C7A324714D1200BC7841 /* AppDelegate.m in Sources */,
 				50FF26412491DC47007D6F6E /* MapController.m in Sources */,
 				500C72DA249F5F5D00E47944 /* UserSession.m in Sources */,
+				5030C6CB24A09B0000D6B3E4 /* ViewController.m in Sources */,
 				5065C7D62471609700BC7841 /* CitiesController.m in Sources */,
 				5065C7B424714D1300BC7841 /* main.m in Sources */,
 				5041E9092495073E009B9C09 /* LocationService.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "TabBarController.h"
+#import "ViewController.h"
 #import "CountriesController.h"
 #import "MapController.h"
 
@@ -21,26 +22,23 @@
 {
     self = [super init];
     if (self) {
+        ViewController *vc = [[ViewController alloc] init];
+        vc.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Main Menu" image:[UIImage systemImageNamed:@"return"] tag:1];
 
         CountriesController *countriesVC = [[CountriesController alloc] init];
-        countriesVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"From List" image:[UIImage systemImageNamed:@"doc.text.magnifyingglass"] tag:1];
+        countriesVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"From List" image:[UIImage systemImageNamed:@"doc.text.magnifyingglass"] tag:2];
 
         UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:countriesVC];
         
         MapController *mapVC = [[MapController alloc] init];
-        mapVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"From Map" image:[UIImage systemImageNamed:@"mappin.and.ellipse"] tag:2];
+        mapVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"From Map" image:[UIImage systemImageNamed:@"mappin.and.ellipse"] tag:3];
 
-        self.viewControllers = @[nc, mapVC];
+        self.viewControllers = @[vc, nc, mapVC];
         //self.hidesBottomBarWhenPushed = YES;
-        self.selectedIndex = 0;
+        self.selectedIndex = 1;
 
     }
     return self;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 @end

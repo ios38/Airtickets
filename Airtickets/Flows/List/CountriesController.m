@@ -15,7 +15,7 @@
 
 @interface CountriesController ()
 
-@property (strong,nonatomic) NSMutableArray *countries;
+@property (strong,nonatomic) NSArray *countries;
 @property (strong, nonatomic) UITableView* tableView;
 
 @end
@@ -56,14 +56,10 @@
     //self.navigationController.navigationBar.hidden = YES;
 }
 
-- (NSMutableArray *)countriesFilteredWith:(NSString *)text{
-    NSMutableArray *countries = [NSMutableArray array];
-    for (Country *country in DataManager.shared.countries) {
-        if ([country.name containsString:text]) {
-            [countries addObject:country];
-        }
-    }
-    return countries;
+- (NSArray *)countriesFilteredWith:(NSString *)text{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name CONTAINS[cd] %@", text];
+    return [DataManager.shared.countries filteredArrayUsingPredicate:predicate];
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -92,7 +88,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if ([searchText  isEqual: @""]) {
-        self.countries = [NSMutableArray arrayWithArray:DataManager.shared.countries];
+        self.countries = [NSArray arrayWithArray:DataManager.shared.countries];
         [self.tableView reloadData];
     } else {
         self.countries = [self countriesFilteredWith:searchText];

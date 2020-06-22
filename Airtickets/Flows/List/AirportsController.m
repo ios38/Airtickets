@@ -17,7 +17,7 @@
 @interface AirportsController ()
 
 @property (strong,nonatomic) City *city;
-@property (strong,nonatomic) NSMutableArray *airports;
+@property (strong,nonatomic) NSArray *airports;
 
 @end
 
@@ -50,15 +50,9 @@
     }];
 }
 
-- (NSMutableArray *)airportsFilteredWith:(NSString *)cityCode and:(NSString *)countryCode {
-    NSMutableArray *airports = [NSMutableArray array];
-    for (Airport *airport in DataManager.shared.airports) {
-        if (airport.cityCode == cityCode && airport.countryCode == countryCode) {
-            //NSLog(@"%@,%@,%@",airport.name,cityCode,countryCode);
-            [airports addObject:airport];
-        }
-    }
-    return airports;
+- (NSArray *)airportsFilteredWith:(NSString *)cityCode and:(NSString *)countryCode {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.cityCode MATCHES[cd] %@ AND SELF.countryCode MATCHES[cd] %@", cityCode, countryCode];
+    return [DataManager.shared.airports filteredArrayUsingPredicate:predicate];
 }
 
 #pragma mark - UITableViewDataSource
