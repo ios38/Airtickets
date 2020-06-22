@@ -194,7 +194,7 @@
     NSString *airport = view.annotation.subtitle;
     [view removeFromSuperview];
     NSLog(@"Selected Airport: %@",airport);
-    UserSession.shared.fromAirport = airport;
+    UserSession.shared.departureAirport = airport;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

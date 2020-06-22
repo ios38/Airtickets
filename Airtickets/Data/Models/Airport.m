@@ -6,7 +6,10 @@
 //  Copyright © 2020 Maksim Romanov. All rights reserved.
 //
 
+#import "DataManager.h"
 #import "Airport.h"
+#import "City.h"
+#import "Country.h"
 
 @implementation Airport
 
@@ -30,6 +33,18 @@
         }
     }
     return self;
+}
+
+-(NSString *)city {
+    NSPredicate *cityPredicate = [NSPredicate predicateWithFormat:@"SELF.code MATCHES %@", self.cityCode];
+    City *city = [DataManager.shared.cities filteredArrayUsingPredicate:cityPredicate].firstObject;
+    return city.name;
+}
+
+-(NSString *)country {
+    NSPredicate *countryPredicate = [NSPredicate predicateWithFormat:@"SELF.code MATCHES %@", self.countryCode];
+    Country *country = [DataManager.shared.countries filteredArrayUsingPredicate:countryPredicate].firstObject;
+    return country.name;
 }
 
 @end

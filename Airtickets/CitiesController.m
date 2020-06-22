@@ -10,6 +10,8 @@
 #import "AirportsController.h"
 #import "DataManager.h"
 #import "Country.h"
+#define MAS_SHORTHAND
+#import "Masonry.h"
 
 @interface CitiesController ()
 
@@ -32,26 +34,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIScreen *screen = [UIScreen mainScreen];
     
     self.navigationItem.title = [NSString stringWithFormat:@"Cities of %@ (%lu)", self.country.name,(unsigned long)[self.cities count]];
     
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, screen.bounds.size.width, 40)];
+    UISearchBar *searchBar = UISearchBar.new;
     searchBar.delegate = self;
     searchBar.placeholder = @"search city";
     [self.view addSubview:searchBar];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 115, screen.bounds.size.width, screen.bounds.size.height - 170)];
+    [searchBar makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.topMargin);
+        make.left.equalTo(self.view.left);
+        make.right.equalTo(self.view.right);
+    }];
+
+    self.tableView = UITableView.new;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    //self.tableView.backgroundColor = [UIColor blueColor];
     [self.view addSubview:self.tableView];
+    
+    [self.tableView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(searchBar.bottom);
+        make.left.equalTo(self.view.left);
+        make.right.equalTo(self.view.right);
+        make.bottom.equalTo(self.view.bottomMargin);
+    }];
 
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = NO;
+    //self.navigationController.navigationBar.hidden = NO;
 }
 
 - (NSMutableArray *)citiesFilteredWith:(NSString *)countryCode{

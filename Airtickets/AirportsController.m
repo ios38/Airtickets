@@ -11,6 +11,8 @@
 #import "Airport.h"
 #import "City.h"
 #import "UserSession.h"
+#define MAS_SHORTHAND
+#import "Masonry.h"
 
 @interface AirportsController ()
 
@@ -32,16 +34,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIScreen *screen = [UIScreen mainScreen];
 
     self.navigationItem.title = [NSString stringWithFormat:@"Airports of %@ (%lu)", self.city.name,(unsigned long)[self.airports count]];
 
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 70, screen.bounds.size.width, screen.bounds.size.height - 125)];
-    //tableView.allowsSelection = NO;
+    UITableView *tableView = UITableView.new;
     tableView.dataSource = self;
     tableView.delegate = self;
-    //tableView.backgroundColor = [UIColor blueColor];
     [self.view addSubview:tableView];
+    
+    [tableView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.topMargin);
+        make.left.equalTo(self.view.left);
+        make.right.equalTo(self.view.right);
+        make.bottom.equalTo(self.view.bottomMargin);
+    }];
 }
 
 - (NSMutableArray *)airportsFilteredWith:(NSString *)cityCode and:(NSString *)countryCode {
@@ -76,7 +82,7 @@
     //double latitude = airport.coordinate.latitude;
     //double longitude = airport.coordinate.longitude;
     //NSLog(@"%@: %f, %f",airport.name,latitude,longitude);
-    UserSession.shared.fromAirport = airport.name;
+    UserSession.shared.departureAirport = airport.name;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, getter = isFlightable) BOOL flightable;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
 
+@property (nonatomic, strong) NSString *country;
+@property (nonatomic, strong) NSString *city;
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

@@ -8,8 +8,8 @@
 
 #import "UserSession.h"
 
-NSString* const fromAirportNotification = @"fromAirportNotification";
-NSString* const fromAirportUserInfoKey =@"fromAirportUserInfoKey";
+NSString* const departureAirportNotification = @"departureAirportNotification";
+NSString* const departureAirportUserInfoKey =@"departureAirportUserInfoKey";
 
 @implementation UserSession
 
@@ -25,11 +25,11 @@ NSString* const fromAirportUserInfoKey =@"fromAirportUserInfoKey";
     return userSession;
 }
 
-- (void) setFromAirport:(NSString*)fromAirport {
-    _fromAirport = fromAirport;
-    NSLog(@"%@ selected", fromAirport);
-    NSDictionary* dictionary = [NSDictionary dictionaryWithObject:fromAirport forKey:fromAirportUserInfoKey];
-    [[NSNotificationCenter defaultCenter] postNotificationName:fromAirportNotification object:nil userInfo:dictionary];
+- (void) setDepartureAirport:(NSString*)departureAirport {
+    _departureAirport = departureAirport;
+    NSLog(@"%@ selected", departureAirport);
+    NSDictionary* dictionary = [NSDictionary dictionaryWithObject:departureAirport forKey:departureAirportUserInfoKey];
+    [[NSNotificationCenter defaultCenter] postNotificationName:departureAirportNotification object:nil userInfo:dictionary];
 }
 
 @end

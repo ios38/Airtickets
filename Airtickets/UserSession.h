@@ -10,12 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString* const fromAirportNotification;
-extern NSString* const fromAirportUserInfoKey;
+extern NSString* const departureAirportNotification;
+extern NSString* const departureAirportUserInfoKey;
 
 @interface UserSession : NSObject
 
-@property (assign,nonatomic) NSString * _Nullable fromAirport;
+@property (assign,nonatomic) NSString * _Nullable departureAirport;
 
 + (UserSession *) shared;
 
