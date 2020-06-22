@@ -33,42 +33,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIScreen *screen = [UIScreen mainScreen];
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, screen.bounds.size.width, 40)];
-    label.text = [NSString stringWithFormat:@"Cities of %@ (%lu)", self.country.name,(unsigned long)[self.cities count]];
-    label.font = [UIFont systemFontOfSize:20 weight:UIFontWeightRegular];
-    label.backgroundColor = [UIColor darkGrayColor];
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:label];
     
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 135, screen.bounds.size.width, 40)];
+    self.navigationItem.title = [NSString stringWithFormat:@"Cities of %@ (%lu)", self.country.name,(unsigned long)[self.cities count]];
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, screen.bounds.size.width, 40)];
     searchBar.delegate = self;
     searchBar.placeholder = @"search city";
     [self.view addSubview:searchBar];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, screen.bounds.size.width, screen.bounds.size.height - 240)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 115, screen.bounds.size.width, screen.bounds.size.height - 170)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     //self.tableView.backgroundColor = [UIColor blueColor];
     [self.view addSubview:self.tableView];
 
-
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, screen.bounds.size.height - 70, screen.bounds.size.width, 40)];
-    [button addTarget:self action:@selector(nextScreen:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor darkGrayColor];
-    [button setTitle:@"Next" forState:UIControlStateNormal];
-    //[self.view addSubview:button];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
-}
-
-- (void) nextScreen: (UIButton *)button {
-    UIViewController *airportController = [[AirportsController alloc] init];
-    [self.navigationController pushViewController:airportController animated:YES];
 }
 
 - (NSMutableArray *)citiesFilteredWith:(NSString *)countryCode{

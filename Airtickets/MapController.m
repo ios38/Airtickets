@@ -14,6 +14,7 @@
 #import "LocationService.h"
 #import "AirportAnnotationView.h"
 #import "AirportCalloutView.h"
+#import "UserSession.h"
 
 #define MAS_SHORTHAND
 #import "Masonry.h"
@@ -43,7 +44,11 @@
     self.mapView.delegate = self;
     [self.view addSubview:self.mapView];
     [self.mapView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        //make.edges.equalTo(self.view);
+        make.top.equalTo(self.view.topMargin);
+        make.left.equalTo(self.view.left);
+        make.right.equalTo(self.view.right);
+        make.bottom.equalTo(self.view.bottomMargin);
     }];
 
     self.myLocationButton = UIButton.new;
@@ -189,6 +194,8 @@
     NSString *airport = view.annotation.subtitle;
     [view removeFromSuperview];
     NSLog(@"Selected Airport: %@",airport);
+    UserSession.shared.fromAirport = airport;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {

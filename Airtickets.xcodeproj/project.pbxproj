@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0FE1A03E1145355A1C2E297F /* Pods_Airtickets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8417A5A4EDDB1EF20AE0098B /* Pods_Airtickets.framework */; };
+		500C72D7249F34E000E47944 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C72D6249F34E000E47944 /* TabBarController.m */; };
+		500C72DA249F5F5D00E47944 /* UserSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C72D9249F5F5D00E47944 /* UserSession.m */; };
 		5041E9092495073E009B9C09 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5041E9072495073E009B9C09 /* LocationService.m */; };
 		5041E90F24960800009B9C09 /* AirportCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5041E90E24960800009B9C09 /* AirportCalloutView.m */; };
 		5065C7A324714D1200BC7841 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7A224714D1200BC7841 /* AppDelegate.m */; };
@@ -32,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		500C72D5249F34E000E47944 /* TabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		500C72D6249F34E000E47944 /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		500C72D8249F5F5D00E47944 /* UserSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSession.h; sourceTree = "<group>"; };
+		500C72D9249F5F5D00E47944 /* UserSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserSession.m; sourceTree = "<group>"; };
 		5041E9072495073E009B9C09 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
 		5041E9082495073E009B9C09 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
 		5041E90D24960800009B9C09 /* AirportCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirportCalloutView.h; sourceTree = "<group>"; };
@@ -159,6 +165,10 @@
 				5041E90E24960800009B9C09 /* AirportCalloutView.m */,
 				50C6A1C92496490E00077691 /* AirportAnnotationView.h */,
 				50C6A1CA2496490E00077691 /* AirportAnnotationView.m */,
+				500C72D5249F34E000E47944 /* TabBarController.h */,
+				500C72D6249F34E000E47944 /* TabBarController.m */,
+				500C72D8249F5F5D00E47944 /* UserSession.h */,
+				500C72D9249F5F5D00E47944 /* UserSession.m */,
 			);
 			path = Airtickets;
 			sourceTree = "<group>";
@@ -321,6 +331,7 @@
 				5065C7C424714F0800BC7841 /* Airport.m in Sources */,
 				5065C7A324714D1200BC7841 /* AppDelegate.m in Sources */,
 				50FF26412491DC47007D6F6E /* MapController.m in Sources */,
+				500C72DA249F5F5D00E47944 /* UserSession.m in Sources */,
 				5065C7D62471609700BC7841 /* CitiesController.m in Sources */,
 				5065C7B424714D1300BC7841 /* main.m in Sources */,
 				5041E9092495073E009B9C09 /* LocationService.m in Sources */,
@@ -328,6 +339,7 @@
 				5065C7CD2471535C00BC7841 /* DataManager.m in Sources */,
 				5065C7CA24714F3600BC7841 /* City.m in Sources */,
 				50CBA76D2471A1EC003FDD90 /* AirportsController.m in Sources */,
+				500C72D7249F34E000E47944 /* TabBarController.m in Sources */,
 				5065C7A624714D1200BC7841 /* SceneDelegate.m in Sources */,
 				50C6A1CB2496490E00077691 /* AirportAnnotationView.m in Sources */,
 			);

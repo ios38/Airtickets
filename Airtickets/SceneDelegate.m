@@ -13,10 +13,11 @@
         self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
     }
 
-    UIViewController *controller = [[ViewController alloc] init];
+    UIViewController *vc = [[ViewController alloc] init];
 
-    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:controller];
-    self.window.rootViewController = nc;
+    //UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:controller];
+    //self.window.rootViewController = nc;
+    self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
 
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.

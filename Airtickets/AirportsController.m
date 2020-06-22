@@ -10,6 +10,7 @@
 #import "DataManager.h"
 #import "Airport.h"
 #import "City.h"
+#import "UserSession.h"
 
 @interface AirportsController ()
 
@@ -33,15 +34,9 @@
     [super viewDidLoad];
     UIScreen *screen = [UIScreen mainScreen];
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, screen.bounds.size.width, 40)];
-    label.text = [NSString stringWithFormat:@"Airports of %@ (%lu)", self.city.name,(unsigned long)[self.airports count]];
-    label.font = [UIFont systemFontOfSize:20 weight:UIFontWeightRegular];
-    label.backgroundColor = [UIColor darkGrayColor];
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:label];
-    
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 130, screen.bounds.size.width, screen.bounds.size.height - 190)];
+    self.navigationItem.title = [NSString stringWithFormat:@"Airports of %@ (%lu)", self.city.name,(unsigned long)[self.airports count]];
+
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 70, screen.bounds.size.width, screen.bounds.size.height - 125)];
     //tableView.allowsSelection = NO;
     tableView.dataSource = self;
     tableView.delegate = self;
@@ -78,9 +73,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Airport *airport = [self.airports objectAtIndex:indexPath.row];
-    double latitude = airport.coordinate.latitude;
-    double longitude = airport.coordinate.longitude;
-    NSLog(@"%@: %f, %f",airport.name,latitude,longitude);
+    //double latitude = airport.coordinate.latitude;
+    //double longitude = airport.coordinate.longitude;
+    //NSLog(@"%@: %f, %f",airport.name,latitude,longitude);
+    UserSession.shared.fromAirport = airport.name;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
