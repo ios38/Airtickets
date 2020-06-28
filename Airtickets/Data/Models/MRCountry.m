@@ -6,9 +6,9 @@
 //  Copyright © 2020 Maksim Romanov. All rights reserved.
 //
 
-#import "Country.h"
+#import "MRCountry.h"
 
-@implementation Country
+@implementation MRCountry
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {

@@ -6,9 +6,9 @@
 //  Copyright © 2020 Maksim Romanov. All rights reserved.
 //
 
-#import "City.h"
+#import "MRCity.h"
 
-@implementation City
+@implementation MRCity
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {

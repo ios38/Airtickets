@@ -8,7 +8,7 @@
 
 #import "MainMenuController.h"
 #import "DataManager.h"
-#import "CountriesController.h"
+#import "MRCountriesController.h"
 #import "MapController.h"
 #import "TabBarController.h"
 #import "UserSession.h"
@@ -98,7 +98,7 @@ typedef enum PlaceType {
 
 -(NSString *)cityAndCountryFromAirport {
     NSPredicate *airportPredicate = [NSPredicate predicateWithFormat:@"SELF.name MATCHES %@", UserSession.shared.departureAirport];
-    Airport *airport = [DataManager.shared.airports filteredArrayUsingPredicate:airportPredicate].firstObject;
+    MRAirport *airport = [DataManager.shared.airports filteredArrayUsingPredicate:airportPredicate].firstObject;
     return [NSString stringWithFormat:@"%@, %@", airport.city, airport.country];
 }
 

@@ -8,22 +8,22 @@
 
 #import "AirportsController.h"
 #import "DataManager.h"
-#import "Airport.h"
-#import "City.h"
+#import "MRAirport.h"
+#import "MRCity.h"
 #import "UserSession.h"
 #define MAS_SHORTHAND
 #import "Masonry.h"
 
 @interface AirportsController ()
 
-@property (strong,nonatomic) City *city;
+@property (strong,nonatomic) MRCity *city;
 @property (strong,nonatomic) NSArray *airports;
 
 @end
 
 @implementation AirportsController
 
-- (instancetype)initWithCity:(City *)city {
+- (instancetype)initWithCity:(MRCity *)city {
     self = [super init];
     if (self) {
         self.city = city;
@@ -63,7 +63,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *airportCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"airportCell"];
-    Country *airport = [self.airports objectAtIndex:indexPath.row];
+    MRCountry *airport = [self.airports objectAtIndex:indexPath.row];
     airportCell.textLabel.text = airport.name;
     
     return airportCell;
@@ -72,7 +72,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Airport *airport = [self.airports objectAtIndex:indexPath.row];
+    MRAirport *airport = [self.airports objectAtIndex:indexPath.row];
     //double latitude = airport.coordinate.latitude;
     //double longitude = airport.coordinate.longitude;
     //NSLog(@"%@: %f, %f",airport.name,latitude,longitude);

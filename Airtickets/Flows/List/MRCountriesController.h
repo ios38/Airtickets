@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CountriesController : UIViewController <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@interface MRCountriesController : UIViewController <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
 @end
 

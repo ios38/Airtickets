@@ -9,13 +9,13 @@
 #import "CitiesController.h"
 #import "AirportsController.h"
 #import "DataManager.h"
-#import "Country.h"
+#import "MRCountry.h"
 #define MAS_SHORTHAND
 #import "Masonry.h"
 
 @interface CitiesController ()
 
-@property (strong,nonatomic) Country *country;
+@property (strong,nonatomic) MRCountry *country;
 @property (strong,nonatomic) NSArray *cities;
 @property (strong, nonatomic) UITableView* tableView;
 
@@ -23,7 +23,7 @@
 
 @implementation CitiesController
 
-- (instancetype)initWithCountry:(Country *)country {
+- (instancetype)initWithCountry:(MRCountry *)country {
     self = [super init];
     if (self) {
         self.country = country;
@@ -85,7 +85,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *cityCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cityCell"];
-    Country *city = [self.cities objectAtIndex:indexPath.row];
+    MRCountry *city = [self.cities objectAtIndex:indexPath.row];
     cityCell.textLabel.text = city.name;
     
     return cityCell;
@@ -94,7 +94,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    City *city = [self.cities objectAtIndex:indexPath.row];
+    MRCity *city = [self.cities objectAtIndex:indexPath.row];
     UIViewController *airportController = [[AirportsController alloc] initWithCity:city];
     [self.navigationController pushViewController:airportController animated:YES];
 }

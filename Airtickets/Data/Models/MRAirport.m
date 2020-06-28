@@ -7,11 +7,11 @@
 //
 
 #import "DataManager.h"
-#import "Airport.h"
-#import "City.h"
-#import "Country.h"
+#import "MRAirport.h"
+#import "MRCity.h"
+#import "MRCountry.h"
 
-@implementation Airport
+@implementation MRAirport
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
@@ -37,13 +37,13 @@
 
 -(NSString *)city {
     NSPredicate *cityPredicate = [NSPredicate predicateWithFormat:@"SELF.code MATCHES %@", self.cityCode];
-    City *city = [DataManager.shared.cities filteredArrayUsingPredicate:cityPredicate].firstObject;
+    MRCity *city = [DataManager.shared.cities filteredArrayUsingPredicate:cityPredicate].firstObject;
     return city.name;
 }
 
 -(NSString *)country {
     NSPredicate *countryPredicate = [NSPredicate predicateWithFormat:@"SELF.code MATCHES %@", self.countryCode];
-    Country *country = [DataManager.shared.countries filteredArrayUsingPredicate:countryPredicate].firstObject;
+    MRCountry *country = [DataManager.shared.countries filteredArrayUsingPredicate:countryPredicate].firstObject;
     return country.name;
 }
 

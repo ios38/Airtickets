@@ -8,7 +8,7 @@
 
 #import "TabBarController.h"
 #import "ViewController.h"
-#import "CountriesController.h"
+#import "MRCountriesController.h"
 #import "MapController.h"
 
 @interface TabBarController ()
@@ -25,7 +25,7 @@
         ViewController *vc = [[ViewController alloc] init];
         vc.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Main Menu" image:[UIImage systemImageNamed:@"return"] tag:1];
 
-        CountriesController *countriesVC = [[CountriesController alloc] init];
+        MRCountriesController *countriesVC = [[MRCountriesController alloc] init];
         countriesVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"From List" image:[UIImage systemImageNamed:@"doc.text.magnifyingglass"] tag:2];
 
         UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:countriesVC];

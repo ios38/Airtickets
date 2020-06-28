@@ -6,21 +6,21 @@
 //  Copyright © 2020 Maksim Romanov. All rights reserved.
 //
 
-#import "CountriesController.h"
+#import "MRCountriesController.h"
 #import "CitiesController.h"
 #import "DataManager.h"
-#import "Country.h"
+#import "MRCountry.h"
 #define MAS_SHORTHAND
 #import "Masonry.h"
 
-@interface CountriesController ()
+@interface MRCountriesController ()
 
 @property (strong,nonatomic) NSArray *countries;
 @property (strong, nonatomic) UITableView* tableView;
 
 @end
 
-@implementation CountriesController
+@implementation MRCountriesController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,7 +70,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *countryCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"countryCell"];
-    Country *country = [self.countries objectAtIndex:indexPath.row];
+    MRCountry *country = [self.countries objectAtIndex:indexPath.row];
     countryCell.textLabel.text = country.name;
     
     return countryCell;
@@ -79,7 +79,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Country *country = [self.countries objectAtIndex:indexPath.row];
+    MRCountry *country = [self.countries objectAtIndex:indexPath.row];
     UIViewController *citiesController = [[CitiesController alloc] initWithCountry:country];
     [self.navigationController pushViewController:citiesController animated:YES];
 }

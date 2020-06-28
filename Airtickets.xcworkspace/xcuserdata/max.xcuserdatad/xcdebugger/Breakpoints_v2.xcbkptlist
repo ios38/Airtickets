@@ -98,5 +98,53 @@
             endingLineNumber = "22">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D017BCF-C430-4B55-8D27-3A33E8F326BA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Airtickets/Data/DataManager.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "-fillCoreData"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5D017BCF-C430-4B55-8D27-3A33E8F326BA - 5be9919543836616"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DataManager fillCoreData]"
+                  moduleName = "Airtickets"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/max/Library/Mobile%20Documents/com~apple~CloudDocs/Geekbrains/7_Obj-C_Project/Airtickets/Airtickets/Data/DataManager.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "41">
+               </Location>
+               <Location
+                  uuid = "5D017BCF-C430-4B55-8D27-3A33E8F326BA - 5be9919543836616"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DataManager fillCoreData]"
+                  moduleName = "Airtickets"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/max/Library/Mobile%20Documents/com~apple~CloudDocs/Geekbrains/7_Obj-C_Project/Airtickets/Airtickets/Data/DataManager.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "63">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

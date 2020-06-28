@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Airport" representedClassName="Airport" parentEntity="Object" syncable="YES" codeGenerationType="class">
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="City" inverseName="airports" inverseEntity="City"/>
+    </entity>
+    <entity name="City" representedClassName="City" parentEntity="Object" syncable="YES" codeGenerationType="class">
+        <relationship name="airports" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Airport" inverseName="city" inverseEntity="Airport"/>
+        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="cities" inverseEntity="Country"/>
+    </entity>
+    <entity name="Country" representedClassName="Country" parentEntity="Object" syncable="YES" codeGenerationType="class">
+        <relationship name="cities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="City" inverseName="country" inverseEntity="City"/>
+    </entity>
+    <entity name="Object" representedClassName="Object" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Country" positionX="-63" positionY="-18" width="128" height="58"/>
+        <element name="City" positionX="-54" positionY="-9" width="128" height="73"/>
+        <element name="Airport" positionX="-36" positionY="9" width="128" height="58"/>
+        <element name="Object" positionX="-18" positionY="27" width="128" height="73"/>
+    </elements>
+</model>

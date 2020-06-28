@@ -8,9 +8,9 @@
 
 #import "MapController.h"
 #import "DataManager.h"
-#import "Country.h"
-#import "City.h"
-#import "Airport.h"
+#import "MRCountry.h"
+#import "MRCity.h"
+#import "MRAirport.h"
 #import "LocationService.h"
 #import "AirportAnnotationView.h"
 #import "AirportCalloutView.h"
@@ -89,7 +89,7 @@
 
 - (NSMutableArray *)airportsFilteredWith:(NSString *)countryCode {
     NSMutableArray *airports = NSMutableArray.new;
-    for (Airport *airport in DataManager.shared.airports) {
+    for (MRAirport *airport in DataManager.shared.airports) {
         if (airport.countryCode == countryCode &&
             ![airport.name containsString:@"Rail"] &&
             ![airport.name containsString:@"Bus"]) {
@@ -102,7 +102,7 @@
 
 - (NSMutableArray *)airportsInRegion:(MKCoordinateRegion) region {
     NSMutableArray *airports = NSMutableArray.new;
-    for (Airport *airport in self.airports) {
+    for (MRAirport *airport in self.airports) {
         //NSLog(@"%@,%f,%f",airport.name,airport.coordinate.latitude,airport.coordinate.longitude);
         CLLocation *airportLocation = [[CLLocation alloc] initWithLatitude:airport.coordinate.latitude longitude:airport.coordinate.longitude];
         if ([self region:region containsLocation:airportLocation]) {
@@ -114,7 +114,7 @@
 
 - (NSMutableArray *)annotationsFromAirports:(NSArray *)airports {
     NSMutableArray *annotations = NSMutableArray.new;
-    for (Airport *airport in airports) {
+    for (MRAirport *airport in airports) {
         MKPointAnnotation *annotation = MKPointAnnotation.new;
         annotation.title = [self cityWithCityCode:airport.cityCode];
         annotation.subtitle = airport.name;
@@ -126,7 +126,7 @@
 }
          
 - (NSString *)cityWithCityCode:(NSString *)cityCode {
-    for (City *city in DataManager.shared.cities) {
+    for (MRCity *city in DataManager.shared.cities) {
         if (city.code == cityCode) {
             return city.name;
             break;
