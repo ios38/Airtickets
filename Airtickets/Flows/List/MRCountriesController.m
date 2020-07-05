@@ -7,7 +7,7 @@
 //
 
 #import "MRCountriesController.h"
-#import "CitiesController.h"
+#import "MRCitiesController.h"
 #import "DataManager.h"
 #import "MRCountry.h"
 #define MAS_SHORTHAND
@@ -80,7 +80,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MRCountry *country = [self.countries objectAtIndex:indexPath.row];
-    UIViewController *citiesController = [[CitiesController alloc] initWithCountry:country];
+    UIViewController *citiesController = [[MRCitiesController alloc] initWithCountry:country];
     [self.navigationController pushViewController:citiesController animated:YES];
 }
 

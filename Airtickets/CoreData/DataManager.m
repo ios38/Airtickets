@@ -30,6 +30,7 @@
     dispatch_once(&onceToken, ^{
         instance = [[DataManager alloc] init];
         instance.context = instance.persistentContainer.viewContext;
+        //NSLog(@"%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]);
     });
     return instance;
 }
@@ -58,7 +59,7 @@
 }
 
 - (void) printArray:(NSArray*) array {
-    
+    /*
     for (id object in array) {
         if ([object isKindOfClass:[Country class]]) {
             Country *country = (Country *) object;
@@ -70,7 +71,7 @@
             Airport *airport = (Airport *) object;
             NSLog(@"Airport: %@ (%@, %@)", airport.name, airport.city.name, airport.city.country.name);
         }
-    }
+    }*/
     NSLog(@"All objects count = %lu",(unsigned long)[array count]);
 }
 
@@ -79,7 +80,7 @@
     
     NSEntityDescription* description = [NSEntityDescription entityForName:@"Object" inManagedObjectContext:self.context];
     [request setEntity:description];
-    [request setFetchLimit:1000];
+    //[request setFetchLimit:10];
 
     NSError* requestError = nil;
     NSArray* resultArray = [self.context executeFetchRequest:request error:&requestError];
@@ -171,21 +172,7 @@
             _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Airtickets"];
             [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
                 if (error != nil) {
-
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    
-                    /*
-                     Typical reasons for an error here include:
-                     * The parent directory does not exist, cannot be created, or disallows writing.
-                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                     * The device is out of space.
-                     * The store could not be migrated to the current model version.
-                     Check the error message to determine what the actual problem was.
-                    */
-                    
                     //[[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-
                     NSLog(@"Unresolved error %@, %@", error, error.userInfo);
                     abort();
                 }
@@ -202,8 +189,6 @@
     NSManagedObjectContext *context = self.persistentContainer.viewContext;
     NSError *error = nil;
     if ([context hasChanges] && ![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         //NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         //abort();
         [[[UIAlertView alloc] initWithTitle:@"Error"
@@ -212,6 +197,33 @@
                           cancelButtonTitle:@"Ok"
                           otherButtonTitles:nil] show];
     }
+}
+
+- (void)backup {
+    NSURL *backupFolderUrl = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
+    NSURL *backupUrl = [backupFolderUrl URLByAppendingPathComponent:@"backup.sqlite"];
+    
+    NSPersistentContainer *container = [[NSPersistentContainer alloc] initWithName:@"Airtickets"];
+    
+    [container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * _Nonnull description, NSError * _Nullable error) {
+        NSPersistentStore *store = container.persistentStoreCoordinator.persistentStores.lastObject;
+        [container.persistentStoreCoordinator migratePersistentStore:store toURL:backupUrl options:nil withType:NSSQLiteStoreType error:nil];
+    }];
+}
+
+- (void)restore {
+    NSURL *storeFolderUrl = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask].firstObject;
+    NSURL *storeUrl = [storeFolderUrl URLByAppendingPathComponent:@"Airtickets.sqlite"];
+    
+    //NSURL *backupFolderUrl = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
+    //NSURL *backupUrl = [backupFolderUrl URLByAppendingPathComponent:@"backup.sqlite"];
+    NSURL *backupUrl = [[NSBundle mainBundle] URLForResource:@"backup" withExtension:@"sqlite"];
+
+    NSPersistentContainer *container = [[NSPersistentContainer alloc] initWithName:@"Airtickets"];
+
+    [container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * _Nonnull description, NSError * _Nullable error) {
+        [container.persistentStoreCoordinator replacePersistentStoreAtURL:storeUrl destinationOptions:nil withPersistentStoreFromURL:backupUrl sourceOptions:nil storeType:NSSQLiteStoreType error:nil];
+    }];
 }
 
 @end

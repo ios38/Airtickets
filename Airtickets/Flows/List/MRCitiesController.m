@@ -6,14 +6,14 @@
 //  Copyright © 2020 Maksim Romanov. All rights reserved.
 //
 
-#import "CitiesController.h"
-#import "AirportsController.h"
+#import "MRCitiesController.h"
+#import "MRAirportsController.h"
 #import "DataManager.h"
 #import "MRCountry.h"
 #define MAS_SHORTHAND
 #import "Masonry.h"
 
-@interface CitiesController ()
+@interface MRCitiesController ()
 
 @property (strong,nonatomic) MRCountry *country;
 @property (strong,nonatomic) NSArray *cities;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation CitiesController
+@implementation MRCitiesController
 
 - (instancetype)initWithCountry:(MRCountry *)country {
     self = [super init];
@@ -95,7 +95,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MRCity *city = [self.cities objectAtIndex:indexPath.row];
-    UIViewController *airportController = [[AirportsController alloc] initWithCity:city];
+    UIViewController *airportController = [[MRAirportsController alloc] initWithCity:city];
     [self.navigationController pushViewController:airportController animated:YES];
 }
 

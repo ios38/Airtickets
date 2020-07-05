@@ -6,7 +6,7 @@
 //  Copyright © 2020 Maksim Romanov. All rights reserved.
 //
 
-#import "AirportsController.h"
+#import "MRAirportsController.h"
 #import "DataManager.h"
 #import "MRAirport.h"
 #import "MRCity.h"
@@ -14,14 +14,14 @@
 #define MAS_SHORTHAND
 #import "Masonry.h"
 
-@interface AirportsController ()
+@interface MRAirportsController ()
 
 @property (strong,nonatomic) MRCity *city;
 @property (strong,nonatomic) NSArray *airports;
 
 @end
 
-@implementation AirportsController
+@implementation MRAirportsController
 
 - (instancetype)initWithCity:(MRCity *)city {
     self = [super init];

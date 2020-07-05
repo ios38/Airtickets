@@ -1,6 +1,7 @@
 #import "SceneDelegate.h"
 #import "MainMenuController.h"
 #import "CoreDataController.h"
+#import "CountriesController.h"
 
 @interface SceneDelegate ()
 
@@ -15,11 +16,12 @@
     }
 
     //UIViewController *vc = [[MainMenuController alloc] init];
-    UIViewController *vc = [[CoreDataController alloc] init];
+    //UIViewController *vc = [[CoreDataController alloc] init];
+    UIViewController *vc = [[CountriesController alloc] init];
 
-    //UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:controller];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     //self.window.rootViewController = nc;
-    self.window.rootViewController = vc;
+    self.window.rootViewController = nc;
     [self.window makeKeyAndVisible];
 
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.

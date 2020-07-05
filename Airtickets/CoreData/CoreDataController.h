@@ -11,10 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CoreDataController : UIViewController <NSFetchedResultsControllerDelegate>
+@interface CoreDataController : UIViewController <NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property(strong,nonatomic) NSManagedObjectContext *context;
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property(strong, nonatomic) UITableView *tableView;
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

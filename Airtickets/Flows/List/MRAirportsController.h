@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AirportsController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@interface MRAirportsController : UIViewController <UITableViewDataSource,UITableViewDelegate>
 
 -(instancetype)initWithCity:(MRCity *)city;
 

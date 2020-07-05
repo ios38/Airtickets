@@ -30,11 +30,12 @@ typedef enum DataSourceType {
 @property (nonatomic, strong, readonly) NSArray *cities;
 @property (nonatomic, strong, readonly) NSArray *airports;
 
-+ (instancetype)shared;
-- (void)loadData;
-- (void)printAllObjects;
-- (void)deleteAllObjects;
-
++ (instancetype) shared;
+- (void) loadData;
+- (void) printAllObjects;
+- (void) deleteAllObjects;
+- (void) backup;
+- (void) restore;
 
 @end
 

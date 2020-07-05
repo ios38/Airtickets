@@ -8,6 +8,8 @@
 
 #import "CoreDataController.h"
 #import "DataManager.h"
+#define MAS_SHORTHAND
+#import "Masonry.h"
 
 @interface CoreDataController ()
 
@@ -23,9 +25,58 @@
 }
 
 - (void)viewDidLoad {
-    //[DataManager.shared deleteAllObjects];
-    //[DataManager.shared loadData];
-    //[DataManager.shared printAllObjects];
+    UISearchBar *searchBar = UISearchBar.new;
+    searchBar.delegate = self;
+    searchBar.placeholder = @"search";
+    [self.view addSubview:searchBar];
+    
+    [searchBar makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.topMargin);
+        make.left.equalTo(self.view.left);
+        make.right.equalTo(self.view.right);
+    }];
+
+    self.tableView = UITableView.new;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    [self.tableView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(searchBar.bottom);
+        make.left.equalTo(self.view.left);
+        make.right.equalTo(self.view.right);
+        make.bottom.equalTo(self.view.bottomMargin);
+    }];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [[self.fetchedResultsController sections] count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString* identifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+    }
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+
+}
+
+#pragma mark - UISearchBar
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSLog(@"SearchText: %@",searchText);
 }
 
 #pragma mark - Fetched results controller
@@ -65,7 +116,7 @@
 - (NSFetchedResultsController *)fetchedResultsController {
     return nil;
 }
-/*
+
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
@@ -113,6 +164,6 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
-}*/
+}
 
 @end

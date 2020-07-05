@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CitiesController : UIViewController <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@interface MRCitiesController : UIViewController <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
 -(instancetype)initWithCountry:(MRCountry *)country;
 
