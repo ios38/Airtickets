@@ -31,6 +31,7 @@
 		5065C7CD2471535C00BC7841 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7CC2471535C00BC7841 /* DataManager.m */; };
 		5065C7D324715B3B00BC7841 /* MRCountriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7D224715B3B00BC7841 /* MRCountriesController.m */; };
 		5065C7D62471609700BC7841 /* MRCitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065C7D52471609700BC7841 /* MRCitiesController.m */; };
+		506F6C9D24B1F3A100F6E59E /* TransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 506F6C9C24B1F3A100F6E59E /* TransitionAnimator.m */; };
 		5079354E24A8D60900698CA6 /* AirportsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5079354D24A8D60900698CA6 /* AirportsController.m */; };
 		5079354F24A9839400698CA6 /* Airtickets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5035B1B124A85930001117FC /* Airtickets.xcdatamodeld */; };
 		50BC2EEB24A8677B00D23301 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BC2EEA24A8677B00D23301 /* CoreDataController.m */; };
@@ -84,6 +85,8 @@
 		5065C7D224715B3B00BC7841 /* MRCountriesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRCountriesController.m; sourceTree = "<group>"; };
 		5065C7D42471609700BC7841 /* MRCitiesController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRCitiesController.h; sourceTree = "<group>"; };
 		5065C7D52471609700BC7841 /* MRCitiesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRCitiesController.m; sourceTree = "<group>"; };
+		506F6C9B24B1F3A100F6E59E /* TransitionAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransitionAnimator.h; sourceTree = "<group>"; };
+		506F6C9C24B1F3A100F6E59E /* TransitionAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransitionAnimator.m; sourceTree = "<group>"; };
 		5079354C24A8D60900698CA6 /* AirportsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirportsController.h; sourceTree = "<group>"; };
 		5079354D24A8D60900698CA6 /* AirportsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirportsController.m; sourceTree = "<group>"; };
 		50BC2EE924A8677B00D23301 /* CoreDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 			children = (
 				50FF26432497512E007D6F6E /* ResultsCaretaker.h */,
 				50FF26442497512E007D6F6E /* ResultsCaretaker.m */,
+				506F6C9B24B1F3A100F6E59E /* TransitionAnimator.h */,
+				506F6C9C24B1F3A100F6E59E /* TransitionAnimator.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -428,6 +433,7 @@
 				500C72DA249F5F5D00E47944 /* UserSession.m in Sources */,
 				5030C6CB24A09B0000D6B3E4 /* ViewController.m in Sources */,
 				5065C7D62471609700BC7841 /* MRCitiesController.m in Sources */,
+				506F6C9D24B1F3A100F6E59E /* TransitionAnimator.m in Sources */,
 				5065C7B424714D1300BC7841 /* main.m in Sources */,
 				5041E9092495073E009B9C09 /* LocationService.m in Sources */,
 				5065C7C724714F2300BC7841 /* MRCountry.m in Sources */,

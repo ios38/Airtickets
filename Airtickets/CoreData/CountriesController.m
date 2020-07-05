@@ -10,8 +10,11 @@
 #import "Country+CoreDataProperties.h"
 #import "CitiesController.h"
 #import "DataManager.h"
+//#import "Animator.h"
 
 @interface CountriesController ()
+
+//@property (strong, nonatomic) Animator * animator;
 
 @end
 
@@ -26,6 +29,7 @@
     //[DataManager.shared backup];
     [DataManager.shared restore];
     //[DataManager.shared printAllObjects];
+    
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -68,6 +72,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Country *country = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSLog(@"did select country: %@",country.name);
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     CitiesController *vc = CitiesController.new;
     vc.country = country;
     [self.navigationController pushViewController:vc animated:YES];
@@ -87,5 +92,6 @@
     //NSLog(@"fetchedObjects: %lu",(unsigned long)[[self.fetchedResultsController fetchedObjects] count]);
     [self.tableView reloadData];
 }
+
 
 @end
