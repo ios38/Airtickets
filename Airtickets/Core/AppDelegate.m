@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "NotificationDelegate.h"
 
 @interface AppDelegate ()
+
+@property (strong,nonatomic) NotificationDelegate *notificationDelegate;
 
 @end
 
@@ -17,9 +20,62 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"request authorization succeeded!");
+        }
+    }];
+        
+    if ([UNUserNotificationCenter class]) {
+        self.notificationDelegate = NotificationDelegate.new;
+        center.delegate = self.notificationDelegate;
+    }
+
+    [self addNotification];
+
     return YES;
 }
 
+#pragma mark - UNUserNotificationCenter
+
+-(void) addNotification {
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+    content.title = @"Уведомление";
+    content.body = @"Прошла 1 минута";
+    content.sound = [UNNotificationSound defaultSound];
+
+    NSDateComponents *components = NSDateComponents.new;
+    components.second = 0;
+    /*
+    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+
+    NSDateComponents *offset = NSDateComponents.new;
+    [offset setSecond: 10];
+    NSLog(@"%@", [NSDate now]);
+    NSDate *notificationDate = [calendar dateByAddingComponents:offset toDate:[NSDate now] options:0];
+    NSLog(@"%@", notificationDate);
+
+    NSDateComponents *components = [calendar componentsInTimeZone:[NSTimeZone systemTimeZone] fromDate:notificationDate];
+    //NSLog(@"%@", components);
+    NSLog(@"%ld:%ld:%ld", (long)components.hour, (long)components.minute,(long)components.second);
+
+    NSDateComponents *newComponents = [[NSDateComponents alloc] init];
+    newComponents.calendar = calendar;
+    newComponents.timeZone = [NSTimeZone defaultTimeZone];
+    newComponents.month = components.month;
+    newComponents.day = components.day;
+    newComponents.hour = components.hour;
+    newComponents.minute = components.minute;
+    */
+    UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components repeats:YES];
+
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"Notification" content:content trigger:trigger];
+    
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center addNotificationRequest:request withCompletionHandler:nil];
+}
 
 #pragma mark - UISceneSession lifecycle
 

@@ -185,7 +185,7 @@
                        toViewController:(UIViewController*)toVC {
     self.animator.operation = operation;
 
-    NSLog(@"%@",operation ? @"UINavigationControllerOperationPush" : @"UINavigationControllerOperationPop");
+    //NSLog(@"%@",operation ? @"UINavigationControllerOperationPush" : @"UINavigationControllerOperationPop");
 
     return self.animator;
 }

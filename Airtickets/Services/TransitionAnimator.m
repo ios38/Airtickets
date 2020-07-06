@@ -19,7 +19,7 @@
     toViewController.view.alpha = 0;
     
     if (self.operation == UINavigationControllerOperationPush) {
-        NSLog(@"UINavigationControllerOperationPush");
+        //NSLog(@"UINavigationControllerOperationPush");
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             fromViewController.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
             toViewController.view.alpha = 1;
@@ -28,7 +28,7 @@
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     } else if (self.operation == UINavigationControllerOperationPop) {
-        NSLog(@"UINavigationControllerOperationPop");
+        //NSLog(@"UINavigationControllerOperationPop");
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             fromViewController.view.transform = CGAffineTransformMakeScale(10.0, 10.0);
             toViewController.view.alpha = 1;
@@ -39,7 +39,7 @@
     }
     /*
     switch (self.operation) {
-        case 1:
+        case UINavigationControllerOperationPush:
             NSLog(@"UINavigationControllerOperationPush");
             [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
                 fromViewController.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
@@ -49,7 +49,7 @@
                 [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
             }];
             break;
-        case 2:
+        case UINavigationControllerOperationPop:
             NSLog(@"UINavigationControllerOperationPop");
             [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
                 fromViewController.view.transform = CGAffineTransformMakeScale(10.0, 10.0);
@@ -64,7 +64,7 @@
 }
 
 - (NSTimeInterval)transitionDuration:(nullable id<UIViewControllerContextTransitioning>)transitionContext {
-    return 0.7;
+    return 0.8;
 }
 
 @end
