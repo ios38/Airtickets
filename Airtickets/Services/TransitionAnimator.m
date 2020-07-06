@@ -18,14 +18,49 @@
     [[transitionContext containerView] addSubview:toViewController.view];
     toViewController.view.alpha = 0;
     
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        fromViewController.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
-        toViewController.view.alpha = 1;
-    } completion:^(BOOL finished) {
-        fromViewController.view.transform = CGAffineTransformIdentity;
-        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-        
-    }];
+    if (self.operation == UINavigationControllerOperationPush) {
+        NSLog(@"UINavigationControllerOperationPush");
+        [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+            fromViewController.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
+            toViewController.view.alpha = 1;
+        } completion:^(BOOL finished) {
+            fromViewController.view.transform = CGAffineTransformIdentity;
+            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        }];
+    } else if (self.operation == UINavigationControllerOperationPop) {
+        NSLog(@"UINavigationControllerOperationPop");
+        [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+            fromViewController.view.transform = CGAffineTransformMakeScale(10.0, 10.0);
+            toViewController.view.alpha = 1;
+        } completion:^(BOOL finished) {
+            fromViewController.view.transform = CGAffineTransformIdentity;
+            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        }];
+    }
+    /*
+    switch (self.operation) {
+        case 1:
+            NSLog(@"UINavigationControllerOperationPush");
+            [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+                fromViewController.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
+                toViewController.view.alpha = 1;
+            } completion:^(BOOL finished) {
+                fromViewController.view.transform = CGAffineTransformIdentity;
+                [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+            }];
+            break;
+        case 2:
+            NSLog(@"UINavigationControllerOperationPop");
+            [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+                fromViewController.view.transform = CGAffineTransformMakeScale(10.0, 10.0);
+                toViewController.view.alpha = 1;
+            } completion:^(BOOL finished) {
+                fromViewController.view.transform = CGAffineTransformIdentity;
+                [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+            }];
+        default:
+            break;
+    }*/
 }
 
 - (NSTimeInterval)transitionDuration:(nullable id<UIViewControllerContextTransitioning>)transitionContext {

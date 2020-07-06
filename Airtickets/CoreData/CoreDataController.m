@@ -51,6 +51,7 @@
     }];
 
     self.animator = TransitionAnimator.new;
+    self.animator.operation = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -182,7 +183,10 @@
         animationControllerForOperation:(UINavigationControllerOperation)operation
                      fromViewController:(UIViewController*)fromVC
                        toViewController:(UIViewController*)toVC {
-    
+    self.animator.operation = operation;
+
+    NSLog(@"%@",operation ? @"UINavigationControllerOperationPush" : @"UINavigationControllerOperationPop");
+
     return self.animator;
 }
 

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TransitionAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
+@property (assign,nonatomic) UINavigationControllerOperation operation;
+
 @end
 
 NS_ASSUME_NONNULL_END
