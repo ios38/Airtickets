@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Airtickets
+
+  Created by Maksim Romanov on 12.07.2020.
+  Copyright © 2020 Maksim Romanov. All rights reserved.
+*/
+
+"appLanguage" = "English";
+"name" = "name";
+
+"countriesTitle" = "Countries";
+"citiesTitle" = "Cities";
+"airportsTitle" = "Airports";
+
+"search" = "search";

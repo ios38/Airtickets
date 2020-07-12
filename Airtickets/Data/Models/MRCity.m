@@ -16,6 +16,7 @@
     if (self) {
         _timezone = [dictionary valueForKey:@"time_zone"];
         _translations = [dictionary valueForKey:@"name_translations"];
+        _ruName = [_translations objectForKey:@"ru"];
         _name = [dictionary valueForKey:@"name"];
         _countryCode = [dictionary valueForKey:@"country_code"];
         _code = [dictionary valueForKey:@"code"];

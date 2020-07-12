@@ -16,6 +16,7 @@
     if (self) {
         _currency = [dictionary valueForKey:@"currency"];
         _translations = [dictionary valueForKey:@"name_translations"];
+        _ruName = [_translations objectForKey:@"ru"];
         _name = [dictionary valueForKey:@"name"];
         _code = [dictionary valueForKey:@"code"];
     }

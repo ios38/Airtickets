@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(strong, nonatomic) NSManagedObjectContext *context;
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic)NSString *localizedName;
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 

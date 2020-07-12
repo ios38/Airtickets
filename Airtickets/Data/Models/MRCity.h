@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MRCity : NSObject
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *ruName;
 @property (nonatomic, strong) NSString *timezone;
 @property (nonatomic, strong) NSDictionary *translations;
 @property (nonatomic, strong) NSString *countryCode;

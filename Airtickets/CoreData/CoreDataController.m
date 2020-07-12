@@ -28,9 +28,11 @@
 }
 
 - (void)viewDidLoad {
+    self.localizedName = NSLocalizedString(@"name", @"");
+
     UISearchBar *searchBar = UISearchBar.new;
     searchBar.delegate = self;
-    searchBar.placeholder = @"search";
+    searchBar.placeholder = NSLocalizedString(@"search", @"");
     [self.view addSubview:searchBar];
     
     [searchBar makeConstraints:^(MASConstraintMaker *make) {

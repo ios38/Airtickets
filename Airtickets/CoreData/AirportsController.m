@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"Airports";
+    self.navigationItem.title = NSLocalizedString(@"airportsTitle", @"");
     ;
 }
 
@@ -39,7 +39,7 @@
     NSEntityDescription* description = [NSEntityDescription entityForName:@"Airport" inManagedObjectContext:self.context];
     [fetchRequest setEntity:description];
     //[fetchRequest setFetchBatchSize:20];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.localizedName ascending:YES];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
 
     self.predicate = [NSPredicate predicateWithFormat:@"city == %@",self.city ];
@@ -53,7 +53,7 @@
         NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
-    self.navigationItem.title = [NSString stringWithFormat: @"Airports (%lu)",(unsigned long)[[aFetchedResultsController fetchedObjects] count]];
+    self.navigationItem.title = [NSString stringWithFormat: @"%@ (%lu)",NSLocalizedString(@"airportsTitle", @""),(unsigned long)[[aFetchedResultsController fetchedObjects] count]];
     //NSLog(@"fetchedObjects: %lu", (unsigned long)[[aFetchedResultsController fetchedObjects] count]);
     _fetchedResultsController = aFetchedResultsController;
     return _fetchedResultsController;
@@ -63,7 +63,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Airport *airport = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = airport.name;
+    cell.textLabel.text = [airport valueForKey:self.localizedName];
     cell.detailTextLabel.text = nil;
     //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
@@ -72,7 +72,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Airport *airport = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"did select airport: %@",airport.name);
+    NSLog(@"did select airport: %@",[airport valueForKey:self.localizedName]);
 }
 
 #pragma mark - UISearchBar
@@ -82,14 +82,14 @@
         [self.fetchedResultsController.fetchRequest setPredicate:self.predicate];
     } else {
         NSMutableArray *predicateArray = [ NSMutableArray arrayWithObject: self.predicate];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@",searchText];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K CONTAINS[cd] %@",self.localizedName,searchText];
         [predicateArray addObject:predicate];
         NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:
         predicateArray];
         [self.fetchedResultsController.fetchRequest setPredicate:compoundPredicate];
     }
     [self.fetchedResultsController performFetch:nil];
-    self.navigationItem.title = [NSString stringWithFormat: @"Airports (%lu)",(unsigned long)[[self.fetchedResultsController fetchedObjects] count]];
+    self.navigationItem.title = [NSString stringWithFormat: @"%@ (%lu)",NSLocalizedString(@"airportsTitle", @""),(unsigned long)[[self.fetchedResultsController fetchedObjects] count]];
     //NSLog(@"fetchedObjects: %lu",(unsigned long)[[self.fetchedResultsController fetchedObjects] count]);
     [self.tableView reloadData];
 }
