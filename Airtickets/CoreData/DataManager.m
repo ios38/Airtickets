@@ -39,17 +39,20 @@
     for (MRCountry *mrCountry in self.countriesArray) {
         Country *country = [NSEntityDescription insertNewObjectForEntityForName:@"Country" inManagedObjectContext:self.context];
         country.name = mrCountry.name;
+        country.ruName = mrCountry.ruName;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.countryCode MATCHES[cd] %@", mrCountry.code];
         NSArray *mrCities = [self.citiesArray filteredArrayUsingPredicate:predicate];
         for (MRCity *mrCity in mrCities) {
             City *city = [NSEntityDescription insertNewObjectForEntityForName:@"City" inManagedObjectContext:self.context];
             city.name = mrCity.name;
+            city.ruName = mrCity.ruName;
             city.country = country;
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.cityCode MATCHES[cd] %@ AND SELF.countryCode MATCHES[cd] %@", mrCity.code, mrCountry.code];
             NSArray *mrAirports = [self.airportsArray filteredArrayUsingPredicate:predicate];
             for (MRAirport *mrAirport in mrAirports) {
                 Airport *airport = [NSEntityDescription insertNewObjectForEntityForName:@"Airport" inManagedObjectContext:self.context];
                 airport.name = mrAirport.name;
+                airport.ruName = mrAirport.ruName;
                 airport.city = city;
             }
         }
@@ -108,7 +111,7 @@
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0), ^{
         NSArray *countriesJsonArray = [self arrayFromFileName:@"countries" ofType:@"json"];
         self.countriesArray = [self createObjectsFromArray:countriesJsonArray withType: DataSourceTypeCountry];
-        
+
         NSArray *citiesJsonArray = [self arrayFromFileName:@"cities" ofType:@"json"];
         self.citiesArray = [self createObjectsFromArray:citiesJsonArray withType: DataSourceTypeCity];
         

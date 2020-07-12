@@ -20,6 +20,7 @@
     UIViewController *vc = [[CountriesController alloc] init];
 
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    //nc.delegate = vc;
     //self.window.rootViewController = nc;
     self.window.rootViewController = nc;
     [self.window makeKeyAndVisible];

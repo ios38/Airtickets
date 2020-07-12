@@ -10,8 +10,11 @@
 #import "DataManager.h"
 #define MAS_SHORTHAND
 #import "Masonry.h"
+#import "TransitionAnimator.h"
 
 @interface CoreDataController ()
+
+@property (strong, nonatomic) TransitionAnimator * animator;
 
 @end
 
@@ -25,9 +28,11 @@
 }
 
 - (void)viewDidLoad {
+    self.localizedName = NSLocalizedString(@"name", @"");
+
     UISearchBar *searchBar = UISearchBar.new;
     searchBar.delegate = self;
-    searchBar.placeholder = @"search";
+    searchBar.placeholder = NSLocalizedString(@"search", @"");
     [self.view addSubview:searchBar];
     
     [searchBar makeConstraints:^(MASConstraintMaker *make) {
@@ -46,6 +51,13 @@
         make.right.equalTo(self.view.right);
         make.bottom.equalTo(self.view.bottomMargin);
     }];
+
+    self.animator = TransitionAnimator.new;
+    self.animator.operation = 0;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.delegate = self;
 }
 
 #pragma mark - UITableViewDataSource
@@ -164,6 +176,20 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)
+                   navigationController:(UINavigationController *)navigationController
+        animationControllerForOperation:(UINavigationControllerOperation)operation
+                     fromViewController:(UIViewController*)fromVC
+                       toViewController:(UIViewController*)toVC {
+    self.animator.operation = operation;
+
+    //NSLog(@"%@",operation ? @"UINavigationControllerOperationPush" : @"UINavigationControllerOperationPop");
+
+    return self.animator;
 }
 
 @end

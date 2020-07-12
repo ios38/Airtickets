@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"Cities";
+    self.navigationItem.title = NSLocalizedString(@"citiesTitle", @"");
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -33,7 +33,7 @@
     NSEntityDescription* description = [NSEntityDescription entityForName:@"City" inManagedObjectContext:self.context];
     [fetchRequest setEntity:description];
     //[fetchRequest setFetchBatchSize:20];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.localizedName ascending:YES];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
 
     self.predicate = [NSPredicate predicateWithFormat:@"country == %@",self.country ];
@@ -47,7 +47,7 @@
         NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
-    self.navigationItem.title = [NSString stringWithFormat: @"Cities (%lu)",(unsigned long)[[aFetchedResultsController fetchedObjects] count]];
+    self.navigationItem.title = [NSString stringWithFormat: @"%@ (%lu)",NSLocalizedString(@"citiesTitle", @""),(unsigned long)[[aFetchedResultsController fetchedObjects] count]];
     //NSLog(@"fetchedObjects: %lu", (unsigned long)[[aFetchedResultsController fetchedObjects] count]);
     _fetchedResultsController = aFetchedResultsController;
     return _fetchedResultsController;
@@ -56,8 +56,8 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     City *city = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = city.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"airports: %lu",(unsigned long)[city.airports count]];
+    cell.textLabel.text = [city valueForKey:self.localizedName];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@: %lu",NSLocalizedString(@"airportsTitle", @""),(unsigned long)[city.airports count]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
@@ -65,7 +65,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     City *city = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"did select city: %@",city.name);
+    NSLog(@"did select city: %@",[city valueForKey:self.localizedName]);
     AirportsController *vc = AirportsController.new;
     vc.city = city;
     [self.navigationController pushViewController:vc animated:YES];
@@ -79,14 +79,14 @@
         [self.fetchedResultsController.fetchRequest setPredicate:self.predicate];
     } else {
         NSMutableArray *predicateArray = [ NSMutableArray arrayWithObject: self.predicate];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@",searchText];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K CONTAINS[cd] %@",self.localizedName,searchText];
         [predicateArray addObject:predicate];
         NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:
         predicateArray];
         [self.fetchedResultsController.fetchRequest setPredicate:compoundPredicate];
     }
     [self.fetchedResultsController performFetch:nil];
-    self.navigationItem.title = [NSString stringWithFormat: @"Cities (%lu)",(unsigned long)[[self.fetchedResultsController fetchedObjects] count]];
+    self.navigationItem.title = [NSString stringWithFormat: @"%@ (%lu)",NSLocalizedString(@"citiesTitle", @""),(unsigned long)[[self.fetchedResultsController fetchedObjects] count]];
     //NSLog(@"fetchedObjects: %lu",(unsigned long)[[self.fetchedResultsController fetchedObjects] count]);
     [self.tableView reloadData];
 }
